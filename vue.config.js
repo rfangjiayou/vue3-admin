@@ -19,7 +19,7 @@ module.exports = {
    */
   publicPath: process.env.NODE_ENV === 'production' ? '/rfangjiayou/' : '/',
   outputDir: 'dist',
-  assetsDir: 'static',
+  // assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
   devServer: {
