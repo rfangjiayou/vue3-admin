@@ -2,6 +2,7 @@
   "name": "vue3-admin",
   "version": "0.1.0",
   "private": true,
+  "homepage":"https://rfangjiayou.github.io/vue3-admin",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
