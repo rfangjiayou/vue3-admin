@@ -55,7 +55,20 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {},
+    "rules": {
+      "indent": [
+        "warn",
+        2
+      ],
+      "semi": [
+        "warn",
+        "never"
+      ],
+      "space-before-function-paren": [
+        "warn",
+        "never"
+      ]
+    },
     "overrides": [
       {
         "files": [
