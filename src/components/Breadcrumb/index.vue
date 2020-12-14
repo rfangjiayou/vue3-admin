@@ -18,6 +18,7 @@ import { reactive, toRefs, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 export default {
+  name: 'Breadcrumb',
   setup() {
     const route = useRoute()
     const state = reactive({

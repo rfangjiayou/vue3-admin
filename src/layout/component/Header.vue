@@ -1,8 +1,12 @@
 <template>
-  <div class="nav-bar" :class="{ 'fold': isCollapse }">
-    <i v-if="!isCollapse" class="icon el-icon-s-fold" @click="handleToggle"></i>
-    <i v-else class="icon el-icon-s-unfold" @click="handleToggle"></i>
-    <Breadcrumb />
+  <div class="nav-bar-wrap" :class="{ 'fold': isCollapse }">
+    <div class="nav-bar">
+      <i v-if="!isCollapse" class="icon el-icon-s-fold" @click="handleToggle"></i>
+      <i v-else class="icon el-icon-s-unfold" @click="handleToggle"></i>
+      <Breadcrumb />
+      <UserSetting class="user-setting" />
+    </div>
+    <TabTag />
   </div>
 </template>
 
@@ -10,12 +14,16 @@
 import { getCurrentInstance } from 'vue'
 import { createNamespacedHelpers } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
+import TabTag from '@/components/TabTag'
+import UserSetting from './UserSetting'
 
 const { mapGetters, mapActions } = createNamespacedHelpers('sideBar')
 
 export default {
   components: {
-    Breadcrumb
+    Breadcrumb,
+    TabTag,
+    UserSetting
   },
   setup() {
     const instance = getCurrentInstance()
@@ -42,15 +50,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.nav-bar {
-  display: flex;
-  align-items: center;
+.nav-bar-wrap {
   position: fixed;
   left: $base-side-width;
   top: 0;
-  height: $base-header-height;
-  width: 100%;
-  padding: $base-padding;
+  width: calc(100% - #{$base-side-width});
+  .nav-bar {
+    display: flex;
+    align-items: center;
+    height: $base-header-height;
+    padding: $base-padding;
+  }
+  .user-setting {
+    margin-left: auto;
+  }
 }
 .icon {
   font-size: 22px;
@@ -63,5 +76,6 @@ export default {
 .fold {
   margin-left: 0 !important;
   left: $base-fold-side-width;
+  width: calc(100% - #{$base-fold-side-width});
 }
 </style>

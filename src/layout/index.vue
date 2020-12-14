@@ -36,7 +36,7 @@ export default {
   .right {
     margin-left: $base-side-width;
     .main {
-      margin-top: $base-header-height;
+      margin-top: $base-header-height + $base-tab-tag-height;
     }
   }
 }
