@@ -1,13 +1,23 @@
 <template>
-  <div class="nav-logo">
+  <div class="nav-logo" :class="{ 'fold-side-bar': isCollapse }">
     <router-link to="/">
-      <img src="@/assets/logo.png" alt="">
+      <img v-if="!isCollapse" src="@/assets/logo.png" alt="">
+      <img v-else src="@/assets/favicon.png" alt="">
     </router-link>
   </div>
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+
+const { mapGetters } = createNamespacedHelpers('sideBar')
+
 export default {
+  computed: {
+    ...mapGetters([
+      'isCollapse'
+    ])
+  }
 }
 </script>
 
@@ -20,6 +30,13 @@ export default {
     height: 45px;
     width: 175px;
     margin-top: 10px;
+  }
+}
+.fold-side-bar {
+  img {
+    width: 30px;
+    height: 30px;
+    margin-top: 15px;
   }
 }
 </style>

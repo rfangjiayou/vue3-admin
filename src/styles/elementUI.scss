@@ -1,1 +1,13 @@
 @import './variables.scss';
+
+.el-menu-item {
+	&:hover {
+		background-color: $base-color-default !important;
+	}
+}
+.el-menu-item.is-active {
+  background-color: $base-menu-background-active !important;
+}
+.el-menu.el-menu--popup {
+	padding: 0;
+}

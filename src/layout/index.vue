@@ -1,9 +1,11 @@
 <template>
   <div class="layout">
     <Side />
-    <section class="right" :class="{'fold-side-bar': isCollapse}">
+    <section class="right" :class="{'fold-side-bar fold': isCollapse}">
       <Header />
-      <router-view />
+      <transition name='fade' mode="out-in">
+        <router-view class="main" />
+      </transition>
     </section>
 </div>
 </template>
@@ -33,10 +35,9 @@ export default {
   display: flex;
   .right {
     margin-left: $base-side-width;
-    margin-top: $base-header-height;
-  }
-  .fold-side-bar {
-    margin-left: 64px;
+    .main {
+      margin-top: $base-header-height;
+    }
   }
 }
 </style>

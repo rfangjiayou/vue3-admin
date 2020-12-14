@@ -1,5 +1,5 @@
 <template>
-  <div class="side-bar-container">
+  <div class="side-bar-container" :class="{ 'fold-side-bar': isCollapse }">
     <nav-logo />
     <el-scrollbar>
       <el-menu
@@ -9,6 +9,7 @@
         :text-color="menuColor"
         :active-text-color="menuColorActive"
         :collapse="isCollapse"
+        :collapse-transition="false"
         router
       >
         <template v-for="menu in menus" >
@@ -36,8 +37,8 @@
             :key="menu.name"
             :index="menu.path"
           >
+            <i :class="menu.icon"></i>
             <template #title>
-              <i :class="menu.icon"></i>
               <span>{{ menu.label }}</span>
             </template>
           </el-menu-item>
@@ -112,13 +113,13 @@ export default {
   /deep/ .el-submenu__title i {
     color: $base-menu-color
   }
-  /deep/ .el-menu-item {
-    &:hover {
-      background-color: $base-color-default !important;
-    }
-  }
-  /deep/ .is-active {
-    background-color: $base-menu-background-active !important;
-  }
+  // /deep/ .el-menu-item {
+  //   &:hover {
+  //     background-color: $base-color-default !important;
+  //   }
+  // }
+  // /deep/ .is-active {
+  //   background-color: $base-menu-background-active !important;
+  // }
 }
 </style>
