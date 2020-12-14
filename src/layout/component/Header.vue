@@ -28,9 +28,7 @@ export default {
   setup() {
     const instance = getCurrentInstance()
 
-    function handleToggle() {
-      instance.proxy.toggle(!instance.proxy.isCollapse)
-    }
+    const { handleToggle } = useToggle(instance)
 
     return {
       handleToggle
@@ -45,6 +43,16 @@ export default {
     ...mapActions([
       'toggle'
     ])
+  }
+}
+
+const useToggle = (instance) => {
+  const handleToggle = () => {
+    instance.proxy.toggle(!instance.proxy.isCollapse)
+  }
+
+  return {
+    handleToggle
   }
 }
 </script>

@@ -13,20 +13,10 @@ export default {
       isFullscreen: false
     })
 
-    function toggle() {
-      if (!screenfull.isEnabled) {
-        // this.$message({
-        //   message: 'you browser can not work',
-        //   type: 'warning'
-        // })
-        return false
-      }
-      screenfull.toggle()
-    }
-
-    function handleChange() {
-      state.isFullscreen = screenfull.isFullscreen
-    }
+    const {
+      toggle,
+      handleChange
+    } = useChange(state)
 
     onMounted(() => {
       if (screenfull.isEnabled) {
@@ -44,6 +34,27 @@ export default {
       ...toRefs(state),
       toggle
     }
+  }
+}
+
+const useChange = (state) => {
+  const toggle = () => {
+    if (!screenfull.isEnabled) {
+      // this.$message({
+      //   message: 'you browser can not work',
+      //   type: 'warning'
+      // })
+      return false
+    }
+    screenfull.toggle()
+  }
+  const handleChange = () => {
+    state.isFullscreen = screenfull.isFullscreen
+  }
+
+  return {
+    toggle,
+    handleChange
   }
 }
 </script>
