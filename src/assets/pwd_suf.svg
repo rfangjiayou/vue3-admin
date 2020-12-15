@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ic/input/eye-invisible/gray70%_normal_14px</title>
+    <g id="ic/input/eye-invisible/gray70%_normal_14px" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.699999988">
+        <g id="EyeClosed">
+            <rect id="蒙版" opacity="0.200000003" x="0" y="0" width="14" height="14"></rect>
+            <path d="M0.5,5.5 C1.51823757,7.54873018 4.03197499,9 7,9 C9.96696465,9 12.4810418,7.54757146 13.5,5.5" id="路径" stroke="#6E6E6E" stroke-linecap="round" stroke-linejoin="round"></path>
+            <line x1="7" y1="11" x2="7" y2="9.5" id="路径-47" stroke="#6E6E6E" stroke-linecap="round" stroke-linejoin="round"></line>
+            <line x1="2.52021621" y1="10.0022456" x2="2.50838079" y2="8.42455207" id="路径-47" stroke="#6E6E6E" stroke-linecap="round" stroke-linejoin="round" transform="translate(2.514299, 9.213399) rotate(30.000000) translate(-2.514299, -9.213399) "></line>
+            <line x1="11.4943852" y1="10.0022456" x2="11.4825498" y2="8.42455207" id="路径-47" stroke="#6E6E6E" stroke-linecap="round" stroke-linejoin="round" transform="translate(11.488468, 9.213399) rotate(150.429809) translate(-11.488468, -9.213399) "></line>
+        </g>
+    </g>
+</svg>

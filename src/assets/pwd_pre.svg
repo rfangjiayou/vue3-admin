@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Login/lock_14px</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.699999988">
+        <g id="登录" transform="translate(-792.000000, -570.000000)">
+            <g transform="translate(706.000000, 291.000000)" id="编组-2">
+                <g transform="translate(74.000000, 264.000000)">
+                    <g id="Login/lock_14px" transform="translate(12.000000, 15.000000)">
+                        <g>
+                            <rect id="蒙版" opacity="0.200000003" x="0" y="0" width="14" height="14"></rect>
+                            <path d="M10.5,4 C10.5,2.06700338 8.93299662,0.5 7,0.5 C5.06700338,0.5 3.5,2.06700338 3.5,4" id="路径" stroke="#6E6E6E"></path>
+                            <path d="M1.5,3.5 L12.5,3.5 C13.0522847,3.5 13.5,3.94771525 13.5,4.5 L13.5,12.5 C13.5,13.0522847 13.0522847,13.5 12.5,13.5 L1.5,13.5 C0.94771525,13.5 0.5,13.0522847 0.5,12.5 L0.5,4.5 C0.5,3.94771525 0.94771525,3.5 1.5,3.5 Z" id="矩形" stroke="#6E6E6E"></path>
+                            <circle id="椭圆形" stroke="#6E6E6E" cx="7" cy="8.5" r="2"></circle>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
