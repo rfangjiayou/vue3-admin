@@ -7,6 +7,10 @@ function resolve(dir) {
 }
 
 const port = process.env.port || 1118 // dev port
+const mockServer = () => {
+  if (process.env.NODE_ENV === 'development') return require('./mock')
+  else return ''
+}
 
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
 module.exports = {
@@ -21,8 +25,17 @@ module.exports = {
     overlay: {
       warnings: false,
       errors: true
-    }
-    // before: require('./mock/mock-server.js')
+    },
+    // proxy: {
+    //   [process.env.VUE_APP_BASE_API]: {
+    //     target: `http://localhost:${port}`,
+    //     changeOrigin: true,
+    //     pathRewrite: {
+    //       ['^' + process.env.VUE_APP_BASE_API]: ''
+    //     }
+    //   }
+    // },
+    before: mockServer
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
