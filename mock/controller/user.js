@@ -6,7 +6,9 @@ module.exports = [
       return {
         code: 200,
         msg: 'success',
-        data: {}
+        result: {
+          token: 'asdasd'
+        }
       }
     }
   },

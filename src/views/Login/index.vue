@@ -33,12 +33,15 @@
 </template>
 
 <script>
-import { ref, computed, reactive, toRefs } from 'vue'
-import { login } from '@/services'
+import { ref, computed, reactive, toRefs, getCurrentInstance } from 'vue'
+import { mapActions } from 'vuex'
+import { useRouter } from 'vue-router'
 
 export default {
   name: 'Login',
-  setup(props, ctx) {
+  setup(props) {
+    const instance = getCurrentInstance()
+    const router = useRouter()
     const state = reactive({
       loginForm: {
         username: '',
@@ -54,24 +57,31 @@ export default {
 
     const form = ref(null)
 
-    const { submit } = useClick(ctx, state, form)
+    const { submit } = useClick(instance, router, state, form)
 
     return {
       ...toRefs(state),
       form,
       submit
     }
+  },
+  methods: {
+    ...mapActions('user', [
+      'login'
+    ])
   }
 }
 
-const useClick = (ctx, state, refForm) => {
+const useClick = (instance, router, state, refForm) => {
   const submit = () => {
     refForm.value.validate(async(valid) => {
       if (!valid) return false
 
       const { loginForm } = state
-      const data = await login(loginForm)
-      console.log(data)
+      const success = await instance.proxy.login(loginForm)
+      if (success) {
+        router.push({ path: '/' })
+      }
     })
   }
 

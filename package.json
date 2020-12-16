@@ -6,7 +6,7 @@
   "scripts": {
     "serve": "cross-env NODE_ENV=development vue-cli-service serve",
     "build": "cross-env NODE_ENV=production vue-cli-service build",
-    "inspect": "node --inspect-brk node_modules/@vue/cli-service/bin/vue-cli-service.js serve",
+    "inspect": "node --inspect node_modules/@vue/cli-service/bin/vue-cli-service.js serve",
     "analyzer": "cross-env NODE_ENV=analyzer vue-cli-service build --report",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"

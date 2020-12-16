@@ -1,4 +1,5 @@
 import axios from 'axios'
+// import { createApp } from 'vue'
 import qs from 'qs'
 import {
   requestTimeout,
@@ -12,6 +13,17 @@ const instance = axios.create({
     'Content-Type': contentType
   }
 })
+
+const handleErrorCode = (code, msg) => {
+  switch (code) {
+  case 401:
+    break
+  case 500:
+    break
+  default:
+    break
+  }
+}
 
 instance.interceptors.request.use(
   config => {
@@ -31,15 +43,17 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   response => {
     const { data } = response
-    // data.success = false
-    // if (code === 200) {
-    //     res.success = true
-    // } else {
-    //     Bus.$emit(ERROR_TYPE_MAP.code, code, msg)
-    // }
+    data.success = false
+    if (data.code === 200) {
+      data.success = true
+    } else {
+      const { code, msg } = data
+      handleErrorCode(code, msg)
+    }
     return data
   },
   error => {
+    handleErrorCode()
     return error
   }
 )
