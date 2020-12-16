@@ -6,7 +6,7 @@ function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
-const port = process.env.port || 1118 // dev port
+const port = process.env.port || 8686 // dev port
 const mockServer = () => {
   if (process.env.NODE_ENV === 'development') return require('./mock')
   else return ''
@@ -26,16 +26,7 @@ module.exports = {
       warnings: false,
       errors: true
     },
-    // proxy: {
-    //   [process.env.VUE_APP_BASE_API]: {
-    //     target: `http://localhost:${port}`,
-    //     changeOrigin: true,
-    //     pathRewrite: {
-    //       ['^' + process.env.VUE_APP_BASE_API]: ''
-    //     }
-    //   }
-    // },
-    before: mockServer
+    after: mockServer()
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that

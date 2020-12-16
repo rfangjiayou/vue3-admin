@@ -1,7 +1,7 @@
 /**
  * 本地注册mock server，并监听文件变化，重新注册路由
  */
-
+const Mock = require('mockjs')
 const chokidar = require('chokidar')
 const chalk = require('chalk')
 // 处理程序之前，在中间件中对传入的请求体进行解析
@@ -18,14 +18,14 @@ const registerRoutes = app => {
     const tmpObj = require(ele)
     mocks.push(...tmpObj)
   })
-  // mocks.forEach(mock => {
-
-  // })
-  for (const mock of mocks) {
+  const mocksForServer = mocks.map(route => {
+    return responseFake(route.url, route.type, route.response)
+  })
+  for (const mock of mocksForServer) {
     app[mock.type](mock.url, mock.response)
     mockLastIndex = app._router.stack.length
   }
-  const mockRoutesLength = Object.keys(mocks).length
+  const mockRoutesLength = Object.keys(mocksForServer).length
 
   return {
     mockRoutesLength: mockRoutesLength,
@@ -40,6 +40,18 @@ const unregisterRoutes = () => {
       delete require.cache[require.resolve(i)]
     }
   })
+}
+
+// for mock server
+const responseFake = (url, type, respond) => {
+  return {
+    url: new RegExp(`${process.env.VUE_APP_BASE_API}${url}`),
+    type: type || 'get',
+    response(req, res) {
+      console.log('request invoke:' + req.path)
+      res.json(Mock.mock(respond instanceof Function ? respond(req, res) : respond))
+    }
+  }
 }
 
 // 请求→响应头解析→注册监听逻辑→清除缓存→响应服务
