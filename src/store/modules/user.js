@@ -1,4 +1,5 @@
-import { login } from '@/services'
+import { login, logout } from '@/services'
+import { setLocalStorage, removeLocalStorage } from '@/utils'
 
 export default {
   state: {
@@ -19,6 +20,15 @@ export default {
       if (success) {
         const { token } = result
         commit('LOGIN', token)
+        setLocalStorage('token', token)
+      }
+      return success
+    },
+    async logout({ commit }) {
+      const { success } = await logout()
+      if (success) {
+        commit('LOGIN', '')
+        removeLocalStorage('token')
       }
       return success
     }

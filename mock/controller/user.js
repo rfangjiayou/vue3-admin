@@ -1,13 +1,27 @@
+const tokens = {
+  admin: 'admin-token',
+  editor: 'editor-token',
+  test: 'test-token'
+}
+
 module.exports = [
   {
     url: '/login',
     type: 'post',
-    response() {
+    response(config) {
+      const { username } = config.body
+      const token = tokens[username]
+      if (!token) {
+        return {
+          code: 500,
+          msg: '用户不存在'
+        }
+      }
       return {
         code: 200,
-        msg: 'success',
+        msg: '',
         result: {
-          token: 'asdasd'
+          token
         }
       }
     }
@@ -18,7 +32,7 @@ module.exports = [
     response() {
       return {
         code: 200,
-        msg: 'success'
+        msg: ''
       }
     }
   }

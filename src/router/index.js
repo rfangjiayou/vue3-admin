@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { getLocalStorage } from '@/utils'
 import Nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
 
@@ -75,7 +76,16 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   Nprogress.start()
-  next()
+  const token = getLocalStorage('token')
+  if (token) {
+    next()
+  } else {
+    if (to.name !== 'Login') {
+      next({ path: '/login' })
+    } else {
+      next()
+    }
+  }
 })
 router.afterEach(() => {
   Nprogress.done()

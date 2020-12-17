@@ -35,13 +35,11 @@
 <script>
 import { ref, computed, reactive, toRefs, getCurrentInstance } from 'vue'
 import { mapActions } from 'vuex'
-import { useRouter } from 'vue-router'
 
 export default {
   name: 'Login',
   setup(props) {
-    const instance = getCurrentInstance()
-    const router = useRouter()
+    const { proxy } = getCurrentInstance()
     const state = reactive({
       loginForm: {
         username: '',
@@ -54,10 +52,8 @@ export default {
       pwdType: computed(() => state.pwdVisible ? 'text' : 'password'),
       pwdVisible: false
     })
-
     const form = ref(null)
-
-    const { submit } = useClick(instance, router, state, form)
+    const { submit } = useClick(proxy, state, form)
 
     return {
       ...toRefs(state),
@@ -72,15 +68,15 @@ export default {
   }
 }
 
-const useClick = (instance, router, state, refForm) => {
+const useClick = (instance, state, refForm) => {
   const submit = () => {
     refForm.value.validate(async(valid) => {
       if (!valid) return false
 
       const { loginForm } = state
-      const success = await instance.proxy.login(loginForm)
+      const success = await instance.login(loginForm)
       if (success) {
-        router.push({ path: '/' })
+        instance.$router.push({ path: '/' })
       }
     })
   }

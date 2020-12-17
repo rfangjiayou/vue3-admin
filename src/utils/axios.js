@@ -1,5 +1,5 @@
 import axios from 'axios'
-// import { createApp } from 'vue'
+import { globalApp } from './prototype'
 import qs from 'qs'
 import {
   requestTimeout,
@@ -16,12 +16,15 @@ const instance = axios.create({
 
 const handleErrorCode = (code, msg) => {
   switch (code) {
-  case 401:
-    break
-  case 500:
-    break
-  default:
-    break
+    case 401:
+      globalApp.$baseMessage('error', '需要重新登录')
+      break
+    case 500:
+      globalApp.$baseMessage('error', msg || '抱歉，遇到了一些错误，请稍后再试')
+      break
+    default:
+      globalApp.$baseMessage('error', '抱歉，遇到了一些错误，请稍后再试')
+      break
   }
 }
 

@@ -1,5 +1,5 @@
+import { createApp } from 'vue'
 import { ElMessage, ElMessageBox, ElNotification } from 'element-plus'
-
 
 const install = (app, options) => {
   app.config.globalProperties.$baseMessage = (type, message) => {
@@ -46,11 +46,12 @@ const install = (app, options) => {
     })
   }
 
-  // app.config.globalProperties.$Bus = app
+  app.config.globalProperties.$Bus = createApp({})
 }
 
-if (typeof window !== 'undefined' && window.vue) {
-  install(window.vue)
-}
+const VUEAPP = createApp({})
+VUEAPP.use(install)
+
+export const globalApp = VUEAPP.config.globalProperties
 
 export default install
