@@ -5,7 +5,10 @@
         v-for="(tab, index) in tabList"
         :key="tab.name"
         class="tab-btn"
-        :class="{ 'tab-active': $route.name === tab.name }"
+        :class="{
+          'tab-active': $route.name === tab.name,
+          'fix': tab.name === 'Home'
+        }"
         @mouseenter="tab.showCloseBtn = true"
         @mouseleave="tab.showCloseBtn = false"
       >
@@ -102,7 +105,7 @@ const useClick = (router, tabList) => {
   }
   .tab-btn {
     display: inline-block;
-    padding: 5px 10px;
+    padding: 5px 10px 5px 14px;
     border: 1px solid $base-border-color;
     border-radius: $base-border-radius;
     cursor: pointer;
@@ -153,6 +156,12 @@ const useClick = (router, tabList) => {
     border-color: $base-color-green;
     .tab-btn__inner {
       color: $base-color-white
+    }
+  }
+  .fix {
+    padding: 5px 14px;
+    &:hover {
+      padding-right: 14px;
     }
   }
 }
