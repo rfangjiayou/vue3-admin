@@ -9,17 +9,17 @@ files.keys().forEach((key) => {
 })
 
 export function mockXHR() {
-  // Mock.XHR.prototype.proxy_send = Mock.XHR.prototype.send
-  // Mock.XHR.prototype.send = function() {
-  //   if (this.custom.xhr) {
-  //     this.custom.xhr.withCredentials = this.withCredentials || false
+  Mock.XHR.prototype.proxy_send = Mock.XHR.prototype.send
+  Mock.XHR.prototype.send = function() {
+    if (this.custom.xhr) {
+      this.custom.xhr.withCredentials = this.withCredentials || false
 
-  //     if (this.responseType) {
-  //       this.custom.xhr.responseType = this.responseType
-  //     }
-  //   }
-  //   this.proxy_send(...arguments)
-  // }
+      if (this.responseType) {
+        this.custom.xhr.responseType = this.responseType
+      }
+    }
+    this.proxy_send(...arguments)
+  }
 
   function XHRHttpRequst(respond) {
     return function(options) {
