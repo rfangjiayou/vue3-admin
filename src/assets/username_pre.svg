@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Login/user_14px</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.699999988">
+        <g id="登录" transform="translate(-792.000000, -496.000000)">
+            <g transform="translate(706.000000, 291.000000)" id="编组-7">
+                <g transform="translate(74.000000, 190.000000)">
+                    <g id="Login/user_14px" transform="translate(12.000000, 15.000000)">
+                        <g id="ic/avatar/avatar-circle_default_24px">
+                            <rect id="蒙版" opacity="0.200000003" x="0" y="0" width="14" height="14"></rect>
+                            <path d="M13.3706505,13.5025578 C13.1037508,12.4884082 12.4378533,11.2048422 11.5044377,10.5145044 C10.3361236,9.65043976 8.74870521,9.5 7,9.5 C5.2535972,9.5 3.66805674,9.64904191 2.50017923,10.5110931 C1.56436464,11.2018506 0.896720532,12.4866943 0.629368429,13.5024858" id="路径" stroke="#6E6E6E" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M3.5,4 C3.5,5.93299662 5.06700338,7.5 7,7.5 C8.93299662,7.5 10.5,5.93299662 10.5,4 C10.5,2.06700338 8.93299662,0.5 7,0.5 C5.06700338,0.5 3.5,2.06700338 3.5,4 Z" id="路径" stroke="#6E6E6E"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -6,6 +6,7 @@
   "scripts": {
     "serve": "cross-env NODE_ENV=development vue-cli-service serve",
     "build": "cross-env NODE_ENV=production vue-cli-service build",
+    "inspect": "node --inspect node_modules/@vue/cli-service/bin/vue-cli-service.js serve",
     "analyzer": "cross-env NODE_ENV=analyzer vue-cli-service build --report",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
@@ -13,12 +14,16 @@
   "dependencies": {
     "axios": "^0.21.0",
     "babel-plugin-component": "^1.1.1",
+    "body-parser": "^1.19.0",
+    "chalk": "^4.1.0",
+    "chokidar": "^3.4.3",
     "core-js": "^3.6.5",
     "cross-env": "^7.0.3",
-    "element-plus": "^1.0.1-beta.7",
+    "element-plus": "^1.0.1-beta.8",
     "mockjs": "^1.1.0",
     "node-sass": "^5.0.0",
     "nprogress": "^0.2.0",
+    "qs": "^6.9.4",
     "sass-loader": "^10.1.0",
     "screenfull": "^5.0.2",
     "vue": "^3.0.0",
@@ -60,7 +65,10 @@
     "rules": {
       "indent": [
         "warn",
-        2
+        2,
+        {
+          "SwitchCase": 1
+        }
       ],
       "semi": [
         "warn",

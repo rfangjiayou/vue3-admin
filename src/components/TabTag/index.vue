@@ -11,7 +11,7 @@
       >
         <div @click="$router.push({ name: tab.name })" class="tab-btn__inner">
           <span>{{tab.label}}</span>
-          <i v-if="tab.showCloseBtn && tab.name !== 'Home'" class="el-icon-close" @click.stop="closeTab(tab, index)"></i>
+          <span v-if="tab.name !== 'Home'" class="icon-close" @click.stop="closeTab(tab, index)"></span>
         </div>
       </div>
     </div>
@@ -94,27 +94,59 @@ const useClick = (router, tabList) => {
   display: flex;
   align-items: center;
   padding: 0 $base-padding;
+  /deep/ .el-scrollbar__bar.is-vertical {
+    display: none;
+  }
   .tab-tag__inner {
     display: flex;
   }
   .tab-btn {
+    display: inline-block;
     padding: 5px 10px;
     border: 1px solid $base-border-color;
     border-radius: $base-border-radius;
-    transition: padding .3s cubic-bezier(.645,.045,.355,1);
     cursor: pointer;
     &__inner {
       font-size: 12px;
       color: $base-font-color;
+      white-space: nowrap;
+      display: flex;
+      transition: all .28s cubic-bezier(.645,.045,.355,1), background 0s, color 0s;
     }
-    i {
+    .icon-close {
+      position: relative;
+      display: block;
+      width: 1px;
       margin-left: 4px;
+      margin-top: 2px;
+      border-radius: 50%;
+      &:hover {
+        background-color: rgba(0,0,0,.12);
+        color: $base-color-white;
+      }
+      &::before {
+        content: '';
+        display: inline-block;
+        position: absolute;
+        top: 1px;
+        left: 0;
+        background: url("~@/assets/close.svg") center / cover no-repeat;
+      }
     }
     &:hover {
+      padding-right: 8px;
+      .icon-close {
+        width: 13px;
+        height: 13px;
+        &::before {
+          width: 12px;
+          height: 12px;
+        }
+      }
     }
   }
   .tab-btn + .tab-btn {
-    margin-left: 10px;
+    margin-left: 5px;
   }
   .tab-active {
     background: $base-color-green;
@@ -123,9 +155,5 @@ const useClick = (router, tabList) => {
       color: $base-color-white
     }
   }
-}
-.sss-enter-active,
-.sss-leave-active {
-  transition: width .28s;
 }
 </style>
