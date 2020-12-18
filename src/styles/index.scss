@@ -25,7 +25,7 @@
 
 @mixin base-scrollbar {
   &::-webkit-scrollbar {
-    width: 12px;
+    width: 0;
     height: 0;
   }
 
@@ -60,8 +60,8 @@ html {
     margin: 0;
     font-family: Avenir, Helvetica, Arial, sans-serif;
     font-size: $base-font-size-default;
-    color: #2c3e50;
-    background: #f6f8f9;
+    color: $base-font-color;
+    background: $base-color-bg;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
@@ -99,4 +99,14 @@ img{
 }
 .fold {
   margin-left: $base-fold-side-width !important;
+}
+
+.clearfix {
+  &:before, &:after {
+    display: table;
+    content: "";
+  }
+  &:after {
+    clear: both
+  }
 }

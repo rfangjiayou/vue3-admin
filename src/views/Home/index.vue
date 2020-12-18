@@ -1,11 +1,19 @@
 <template>
-  <div>
-    首页
-  </div>
+  <Page>
+    <Statistics />
+    <Account />
+  </Page>
 </template>
 
 <script>
+import Statistics from './Statistics'
+import Account from './Account'
+
 export default {
+  components: {
+    Statistics,
+    Account
+  }
 }
 </script>
 

@@ -62,6 +62,8 @@ const useToggle = (instance) => {
   position: fixed;
   left: $base-side-width;
   top: 0;
+  z-index: $base-z-index;
+  background: $base-color-white;
   width: calc(100% - #{$base-side-width});
   .nav-bar {
     display: flex;

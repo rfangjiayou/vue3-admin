@@ -103,6 +103,7 @@ export default {
   top: 0;
   left: 0;
   bottom: 0;
+  z-index: $base-z-index;
   /deep/ .el-scrollbar {
     height: 100%;
   }

@@ -19,6 +19,10 @@ module.exports = {
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
+  transpileDependencies: [
+    'vue-echarts',
+    'resize-detector'
+  ],
   devServer: {
     port: port,
     open: true,

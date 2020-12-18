@@ -102,6 +102,7 @@ const useClick = (router, tabList) => {
   }
   .tab-tag__inner {
     display: flex;
+    margin-top: 5px;
   }
   .tab-btn {
     display: inline-block;
@@ -124,7 +125,7 @@ const useClick = (router, tabList) => {
       margin-top: 2px;
       border-radius: 50%;
       &:hover {
-        background-color: rgba(0,0,0,.12);
+        background-color: $base-color-gray;
         color: $base-color-white;
       }
       &::before {

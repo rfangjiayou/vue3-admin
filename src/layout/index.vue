@@ -3,9 +3,11 @@
     <Side />
     <section class="right" :class="{'fold-side-bar fold': isCollapse}">
       <Header />
-      <transition name='fade' mode="out-in">
-        <router-view class="main" />
-      </transition>
+      <section class="main">
+        <transition name='fade' mode="out-in">
+          <router-view  />
+        </transition>
+      </section>
     </section>
 </div>
 </template>

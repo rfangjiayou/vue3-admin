@@ -3,10 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import ElementPlus from 'element-plus'
-import 'element-plus/lib/theme-chalk/index.css'
-
-import vuePrototype from '@/utils/prototype.js'
+import plugins from './plugins'
 import '@/styles/index.scss'
 
 if (process.env.NODE_ENV === 'production') {
@@ -16,7 +13,4 @@ if (process.env.NODE_ENV === 'production') {
 
 const app = createApp(App)
 
-app.use(ElementPlus)
-app.use(vuePrototype)
-
-app.use(store).use(router).mount('#app')
+app.use(store).use(router).use(plugins).mount('#app')
