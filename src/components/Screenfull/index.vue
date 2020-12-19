@@ -1,5 +1,17 @@
 <template>
-  <i class="icon" :class="isFullscreen ? 'unscreenfull-icon' : 'screenfull-icon'" @click="toggle"></i>
+  <!-- <i class="icon" :class="isFullscreen ? 'unscreenfull-icon' : 'screenfull-icon'" @click="toggle"></i> -->
+  <IconSvg
+    v-if="isFullscreen"
+    :iconName="`unfullscreen`"
+    class="icon"
+    @click="toggle"
+  />
+  <IconSvg
+    v-else
+    :iconName="`fullscreen`"
+    class="icon"
+    @click="toggle"
+  />
 </template>
 
 <script>
@@ -61,18 +73,11 @@ const useChange = (state) => {
 
 <style lang="scss" scoped>
 .icon {
+  font-size: 22px;
   cursor: pointer;
-  width: 22px;
-  height: 22px;
   margin-top: 2px;
   &:hover {
     color: $base-color-default;
   }
-}
-.screenfull-icon {
-  background: url("~@/assets/fullscreen.svg") center / cover no-repeat;
-}
-.unscreenfull-icon {
-  background: url("~@/assets/unfullscreen.svg") center / cover no-repeat;
 }
 </style>

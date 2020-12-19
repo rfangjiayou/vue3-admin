@@ -11,18 +11,38 @@
         <el-form-item prop="username" class="form-basic">
           <el-input v-model="loginForm.username" placeholder="请输入您的邮箱/手机号码">
             <template #prefix>
-              <i class="username-pre"></i>
+              <IconSvg
+                :iconName="`username_pre`"
+                class="icon username-pre"
+              />
+              <!-- <i class="username-pre"></i> -->
             </template>
           </el-input>
         </el-form-item>
         <el-form-item prop="password" class="form-basic">
           <el-input v-model="loginForm.password" :type="pwdType" placeholder="请输入您的登录密码" @keyup.enter="submit">
             <template #prefix>
-              <i class="pwd-pre"></i>
+              <IconSvg
+                :iconName="`pwd_pre`"
+                class="icon pwd-pre"
+              />
+              <!-- <i class="pwd-pre"></i> -->
             </template>
             <template #suffix>
-              <i v-if="pwdVisible" class="pwd-suf-eye" @click="pwdVisible = !pwdVisible"></i>
-              <i v-else class="pwd-suf" @click="pwdVisible = !pwdVisible"></i>
+              <IconSvg
+                v-if="pwdVisible"
+                :iconName="`pwd_suf2`"
+                class="icon pwd-suf-eye"
+                @click="pwdVisible = !pwdVisible"
+              />
+              <IconSvg
+                v-else
+                :iconName="`pwd_suf`"
+                class="icon pwd-suf"
+                @click="pwdVisible = !pwdVisible"
+              />
+              <!-- <i v-if="pwdVisible" class="pwd-suf-eye" @click="pwdVisible = !pwdVisible"></i> -->
+              <!-- <i v-else class="pwd-suf" @click="pwdVisible = !pwdVisible"></i> -->
             </template>
           </el-input>
         </el-form-item>
@@ -109,17 +129,13 @@ const useClick = (instance, state, refForm) => {
     }
     .form-basic {
       width: 360px;
-      .username-pre, .pwd-pre, .pwd-suf, .pwd-suf-eye {
-        height: 14px;
-        width: 14px;
-        display: block;
+      .icon {
+        font-size: 14px;
       }
       .username-pre {
-        background: url("~@/assets/username_pre.svg") center / cover no-repeat;
         margin: 13px 10px 0 5px;
       }
       .pwd-pre {
-        background: url("~@/assets/pwd_pre.svg") center / cover no-repeat;
         margin: 13px 10px 0 5px;
       }
       .pwd-suf, .pwd-suf-eye {
@@ -127,12 +143,6 @@ const useClick = (instance, state, refForm) => {
         &:hover {
             cursor: pointer;
         }
-      }
-      .pwd-suf {
-          background: url("~@/assets/pwd_suf.svg") center / cover no-repeat;
-      }
-      .pwd-suf-eye {
-          background: url("~@/assets/pwd_suf_2.svg") center / cover no-repeat;
       }
     }
     /deep/ .el-button {

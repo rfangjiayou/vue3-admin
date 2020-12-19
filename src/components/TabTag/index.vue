@@ -6,15 +6,20 @@
         :key="tab.name"
         class="tab-btn"
         :class="{
-          'tab-active': $route.name === tab.name,
-          'fix': tab.name === 'Home'
+          'tab-active': $route.name === tab.name
         }"
         @mouseenter="tab.showCloseBtn = true"
         @mouseleave="tab.showCloseBtn = false"
       >
         <div @click="$router.push({ name: tab.name })" class="tab-btn__inner">
           <span>{{tab.label}}</span>
-          <span v-if="tab.name !== 'Home'" class="icon-close" @click.stop="closeTab(tab, index)"></span>
+            <span v-if="tab.name !== 'Home'" class="icon-close" @click.stop="closeTab(tab, index)">
+              <IconSvg
+                v-if="tab.showCloseBtn && tab.name !== 'Home'"
+                iconName="close"
+                class="icon"
+              />
+            </span>
         </div>
       </div>
     </div>
@@ -106,7 +111,7 @@ const useClick = (router, tabList) => {
   }
   .tab-btn {
     display: inline-block;
-    padding: 5px 10px 5px 14px;
+    padding: 5px 10px;
     border: 1px solid $base-border-color;
     border-radius: $base-border-radius;
     cursor: pointer;
@@ -115,37 +120,30 @@ const useClick = (router, tabList) => {
       color: $base-font-color;
       white-space: nowrap;
       display: flex;
-      transition: all .28s cubic-bezier(.645,.045,.355,1), background 0s, color 0s;
     }
     .icon-close {
       position: relative;
       display: block;
       width: 1px;
-      margin-left: 4px;
-      margin-top: 2px;
+      margin-top: 3px;
       border-radius: 50%;
-      &:hover {
-        background-color: $base-color-gray;
-        color: $base-color-white;
-      }
-      &::before {
-        content: '';
-        display: inline-block;
+      transition: all .28s cubic-bezier(.645,.045,.355,1), background 0s, color 0s;
+      .icon {
         position: absolute;
-        top: 1px;
-        left: 0;
-        background: url("~@/assets/close.svg") center / cover no-repeat;
+        top: 2px;
+        left: 2px;
+        font-size: 8px;
+      }
+      &:hover {
+        background: $base-color-gray;
+        color: $base-color-white;
       }
     }
     &:hover {
-      padding-right: 8px;
       .icon-close {
-        width: 13px;
-        height: 13px;
-        &::before {
-          width: 12px;
-          height: 12px;
-        }
+        margin-left: 4px;
+        width: 12px;
+        height: 12px;
       }
     }
   }
@@ -157,12 +155,6 @@ const useClick = (router, tabList) => {
     border-color: $base-color-green;
     .tab-btn__inner {
       color: $base-color-white
-    }
-  }
-  .fix {
-    padding: 5px 14px;
-    &:hover {
-      padding-right: 14px;
     }
   }
 }

@@ -5,6 +5,8 @@ import store from './store'
 
 import plugins from './plugins'
 import '@/styles/index.scss'
+import '@/assets/icons'
+import '@/assets/icons/iconfont.js'
 
 if (process.env.NODE_ENV === 'production') {
   const { mockXHR } = require('@/utils/static')

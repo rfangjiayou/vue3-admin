@@ -1,5 +1,9 @@
 <template>
-  <i class="position"></i>
+  <IconSvg
+    :iconName="`position`"
+    class="icon"
+    @click="toggle"
+  />
   <el-breadcrumb separator="/">
     <transition-group name="breadcrumb" mode="out-in">
       <el-breadcrumb-item
@@ -52,13 +56,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.position {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
+.icon {
+  font-size: 20px;
   margin-bottom: 2px;
   margin-right: 5px;
-  background: url("~@/assets/position.svg") center / cover no-repeat;
 }
 .breadcrumb-item {
   display: inline-block;
