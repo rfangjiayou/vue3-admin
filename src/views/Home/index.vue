@@ -19,11 +19,12 @@ export default {
 
 <style lang="scss" scoped>
 .home {
+  padding: $base-padding - 3px $base-padding $base-padding $base-padding;
   * {
     transition: none;
   }
   /deep/ .page__inner{
-    padding: 0;
+    padding: 3px 0 0 0;
     border-radius: 0;
     background: $base-color-bg;
   }

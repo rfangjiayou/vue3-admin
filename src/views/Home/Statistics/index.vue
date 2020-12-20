@@ -155,6 +155,7 @@ export default {
       line-height: 40px;
     }
     &:hover {
+      transform: translateY(-3px);
       .icon-svg {
         color: $base-color-white !important;
       }
