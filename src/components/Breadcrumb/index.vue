@@ -2,7 +2,6 @@
   <IconSvg
     :iconName="`position`"
     class="icon"
-    @click="toggle"
   />
   <el-breadcrumb separator="/">
     <transition-group name="breadcrumb" mode="out-in">

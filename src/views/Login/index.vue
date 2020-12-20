@@ -15,7 +15,6 @@
                 :iconName="`username_pre`"
                 class="icon username-pre"
               />
-              <!-- <i class="username-pre"></i> -->
             </template>
           </el-input>
         </el-form-item>
@@ -26,12 +25,11 @@
                 :iconName="`pwd_pre`"
                 class="icon pwd-pre"
               />
-              <!-- <i class="pwd-pre"></i> -->
             </template>
             <template #suffix>
               <IconSvg
                 v-if="pwdVisible"
-                :iconName="`pwd_suf2`"
+                :iconName="`pwd_suf_2`"
                 class="icon pwd-suf-eye"
                 @click="pwdVisible = !pwdVisible"
               />
@@ -41,8 +39,6 @@
                 class="icon pwd-suf"
                 @click="pwdVisible = !pwdVisible"
               />
-              <!-- <i v-if="pwdVisible" class="pwd-suf-eye" @click="pwdVisible = !pwdVisible"></i> -->
-              <!-- <i v-else class="pwd-suf" @click="pwdVisible = !pwdVisible"></i> -->
             </template>
           </el-input>
         </el-form-item>
