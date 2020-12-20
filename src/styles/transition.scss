@@ -1,16 +1,16 @@
 /* fade */
 .fade-enter-active,
 .fade-leave-active {
-	transition: all .28s;
+	transition: all .3s;
 }
 
 .fade-enter-active{
 	opacity: 0;
-	// transform: translateX(-30px);
+	transform: translateX(-30px);
 }
 .fade-leave-to {
 	opacity: 0;
-	// transform: translateX(-30px);
+	transform: translateX(30px);
 }
 
 /* breadcrumb */
