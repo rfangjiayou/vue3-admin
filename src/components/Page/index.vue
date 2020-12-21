@@ -27,12 +27,13 @@ export default {
   // min-height: calc(100vh - #{$base-header-height} - #{$base-tab-tag-height});
   width: calc(100vw - #{$base-side-width});
   padding: $base-padding;
-  /deep/ .el-scrollbar__wrap {
-    margin-bottom: 0 !important;
-  }
-  /deep/ .el-scrollbar__bar.is-horizontal {
-    height: 0;
-  }
+  // /deep/ .el-scrollbar__wrap {
+  //   // margin-bottom: 0 !important;
+  //   // width: calc(100vw - #{$base-side-width} - #{$base-padding * 2});
+  // }
+  // /deep/ .el-scrollbar__bar.is-horizontal {
+  //   // height: 0;
+  // }
   &__inner {
     padding: $base-padding;
     border-radius: $base-border-radius;

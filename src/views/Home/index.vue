@@ -1,8 +1,8 @@
 <template>
-  <Page class="home">
+  <div class="home">
     <Statistics />
     <Account />
-  </Page>
+  </div>
 </template>
 
 <script>
@@ -19,14 +19,9 @@ export default {
 
 <style lang="scss" scoped>
 .home {
-  padding: $base-padding - 3px $base-padding $base-padding $base-padding;
+  padding: $base-padding;
   * {
     transition: none;
-  }
-  /deep/ .page__inner{
-    padding: 3px 0 0 0;
-    border-radius: 0;
-    background: $base-color-bg;
   }
 }
 </style>

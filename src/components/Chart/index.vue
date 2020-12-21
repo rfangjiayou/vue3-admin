@@ -5,8 +5,9 @@
 <script>
 import ECharts from 'echarts/lib/echarts'
 import '@/plugins/echarts'
-import { onMounted, onUnmounted, toRefs, ref } from 'vue'
+import { onMounted, onBeforeUnmount, toRefs, ref } from 'vue'
 import { debounce } from 'lodash-es'
+import { addListener, removeListener } from 'resize-detector'
 
 export default {
   props: {
@@ -22,11 +23,11 @@ export default {
 
     onMounted(() => {
       myChart.value = initChart(echart, options)
-      window.addEventListener('resize', resizeHandler(myChart))
+      addListener(echart.value, resizeHandler(myChart))
     })
 
-    onUnmounted(() => {
-      window.removeEventListener('resize', resizeHandler(myChart))
+    onBeforeUnmount(() => {
+      removeListener(echart.value, resizeHandler)
     })
 
     return {

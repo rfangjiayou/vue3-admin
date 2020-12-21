@@ -88,18 +88,150 @@ export default {
         }
       ],
       options: {
+        grid: {
+          left: '2%',
+          right: '2%',
+          bottom: '8%',
+          containLabel: true
+        },
+        legend: {
+          data: ['expected', 'actual'],
+          top: '5%',
+          // icon: 'circle', // 这个字段控制形状,类型包括 circle，rect ，roundRect，triangle，diamond，pin，arrow，none
+          // itemWidth: 10, // 设置宽度
+          // itemHeight: 10, // 设置高度
+          itemGap: 50 // 设置间距
+          // formatter: function(name) {
+          //   let label = ''
+          //   switch (name) {
+          //     case 'cri':
+          //       label = '严重'
+          //       break
+          //     case 'high':
+          //       label = '高危'
+          //       break
+          //     case 'mid':
+          //       label = '中危'
+          //       break
+          //     case 'low':
+          //       label = '低危'
+          //       break
+          //     default:
+          //       break
+          //   }
+          //   return label
+          // }
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: { // 坐标轴指示器
+            type: 'cross'
+          },
+          padding: 10
+          // formatter: function(params) {
+          //   let showHtm = params[0].name + '<br>'
+          //   for (let i = 0; i < params.length; i++) {
+          //     let label = ''
+          //     switch (params[i].seriesName) {
+          //       case 'cri':
+          //         label = '严重'
+          //         break
+          //       case 'high':
+          //         label = '高危'
+          //         break
+          //       case 'mid':
+          //         label = '中危'
+          //         break
+          //       case 'low':
+          //         label = '低危'
+          //         break
+          //       default:
+          //         break
+          //     }
+          //     showHtm += `<span style="display:inline-block;box-sizing:border-box;border-radius:5px;margin-right:10px;width:10px;height:10px;background-color:${params[i].color};border:${params[i].color} solid 3px;"></span><span style="margin:5px 0;">${label}:</span><span style="margin:5px 0;"> ${params[i].value}</span><br>`
+          //   }
+          //   return showHtm
+          // }
+        },
+        color: ['#36a3f7', '#f4516c'],
         xAxis: {
           type: 'category',
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+          boundaryGap: false,
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          axisLine: { // 坐标线
+            lineStyle: {
+              color: '#36a3f7'
+            }
+          },
+          splitLine: { // 坐标刻度
+            show: false
+          },
+          axisTick: { // 刻度点
+            show: false
+          },
+          axisLabel: {
+            show: true,
+            color: '#9bacbf'
+          }
         },
         yAxis: {
-          type: 'value'
+          type: 'value',
+          axisLine: { // 坐标线
+            show: true,
+            lineStyle: {
+              color: '#36a3f7'
+            }
+          },
+          axisTick: { // 刻度点
+            show: false
+          },
+          axisLabel: {
+            show: true,
+            inside: false,
+            color: '#9bacbf'
+          },
+          splitLine: {
+            show: true,
+            lineStyle: {
+              color: '#e6e8eb',
+              type: 'dashed'
+            }
+          }
         },
-        series: [{
-          data: [820, 932, 901, 934, 1290, 1330, 1320],
-          type: 'line',
-          smooth: true
-        }]
+        series: [
+          {
+            name: 'expected',
+            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            type: 'line',
+            itemStyle: {
+              emphasis: {
+                borderWidth: 5,
+                color: '#36a3f7',
+                borderColor: '#36a3f7'
+              }//* **这个字段就是控制鼠标悬浮在圆点上面让整个圆填充满背景色，也可以更改边框颜色等！***
+            },
+            areaStyle: {
+              opacity: 0.1
+            },
+            smooth: true
+          },
+          {
+            name: 'actual',
+            data: [1200, 1320, 1010, 1340, 900, 2300, 2100],
+            type: 'line',
+            areaStyle: {
+              opacity: 0.1
+            },
+            itemStyle: {
+              emphasis: {
+                borderWidth: 5,
+                color: '#f4516c',
+                borderColor: '#f4516c'
+              }//* **这个字段就是控制鼠标悬浮在圆点上面让整个圆填充满背景色，也可以更改边框颜色等！***
+            },
+            smooth: true
+          }
+        ]
       }
     })
 
