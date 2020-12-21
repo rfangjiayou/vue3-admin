@@ -1,25 +1,23 @@
 <template>
-  <div class="account">
-    <el-row :gutter="50">
-      <el-col
-        v-for="item in cardList"
-        :key="item.name"
-        :xs="24"
-        :sm="24"
-        :md="24"
-        :lg="24"
-        :xl="8"
+  <el-row :gutter="20" class="account">
+    <el-col
+      v-for="item in cardList"
+      :key="item.name"
+      :xs="24"
+      :sm="24"
+      :md="24"
+      :lg="24"
+      :xl="8"
+    >
+      <el-card
+        shadow="none"
+        class="card"
+        :body-style="{ padding: '0px' }"
       >
-        <el-card
-          shadow="none"
-          class="card"
-          :body-style="{ padding: '0px' }"
-        >
-          <Chart :options="item.options"></Chart>
-        </el-card>
-      </el-col>
-    </el-row>
-  </div>
+        <Chart :options="item.options"></Chart>
+      </el-card>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
@@ -38,8 +36,9 @@ export default {
               data: ['WAF-01', 'WAF-02', 'WAF-03']
             },
             tooltip: {
-              trigger: 'axis'
+              // trigger: 'axis'
             },
+            color: ['#40c9c6', 'rgb(179, 127, 235)', '#36a3f7'],
             radar: {
               indicator: [
                 { text: '流量', max: 100 },
@@ -54,18 +53,24 @@ export default {
             series: [
               {
                 type: 'radar',
-                areaStyle: {},
+                symbol: 'none',
+                itemStyle: {
+                  borderWidth: 0
+                },
+                areaStyle: {
+                  opacity: 0.8
+                },
                 data: [
                   {
-                    value: [85, 60, 90, 80, 90],
+                    value: [65, 60, 80, 60, 50],
                     name: 'WAF-01'
                   },
                   {
-                    value: [95, 80, 90, 88, 85],
+                    value: [75, 60, 50, 68, 65],
                     name: 'WAF-02'
                   },
                   {
-                    value: [90, 70, 95, 90, 97],
+                    value: [60, 70, 65, 50, 67],
                     name: 'WAF-03'
                   }
                 ]
@@ -118,6 +123,7 @@ export default {
               itemGap: 50,
               data: ['Direct', 'Mail Ad', 'Affiliate Ad']
             },
+            color: ['#40c9c6', 'rgb(179, 127, 235)', '#36a3f7'],
             grid: {
               left: '5%',
               right: '5%',

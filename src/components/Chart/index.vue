@@ -10,6 +10,7 @@ import { debounce } from 'lodash-es'
 import { addListener, removeListener } from 'resize-detector'
 
 export default {
+  name: 'Chart',
   props: {
     options: {
       type: Object,

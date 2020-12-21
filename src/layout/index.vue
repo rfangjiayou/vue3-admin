@@ -3,7 +3,7 @@
     <Side />
     <section class="right" :class="{'fold': isCollapse}">
       <Header />
-      <section class="main">
+      <section class="main" :class="{ 'fold-main': isCollapse }">
         <transition name='fade' mode="out-in">
           <router-view  />
         </transition>
@@ -42,6 +42,10 @@ export default {
     .main {
       overflow: hidden;
       margin-top: $base-header-height + $base-tab-tag-height;
+      max-width: calc(100vw - #{$base-side-width});
+    }
+    .fold-main {
+      max-width: calc(100vw - #{$base-fold-side-width});
     }
   }
 }

@@ -2,17 +2,20 @@
   <div class="home">
     <Statistics />
     <Account />
+    <Info />
   </div>
 </template>
 
 <script>
 import Statistics from './Statistics'
 import Account from './Account'
+import Info from './Info'
 
 export default {
   components: {
     Statistics,
-    Account
+    Account,
+    Info
   }
 }
 </script>
