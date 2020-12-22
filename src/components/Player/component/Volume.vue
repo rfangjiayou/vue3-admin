@@ -1,5 +1,5 @@
 <template>
-  <div class="volume-ctrl">
+  <div class="volume-ctrl" @mouseenter="visible = true" @mouseleave="visible = false">
     <IconSvg
       v-if="isMuted"
       :iconName="`pwd_suf_2`"
@@ -12,19 +12,21 @@
       class="volume-btn"
       @click="setMuted"
     />
-    <div class="volume-panel">
-      <div class="process" @click="updateVolume">
-        <div class="current-process" :style="{height: volume + '%'}">
-        </div>
-        <div
-          class="drag-btn"
-          :style="{top: `${100 - volume}%`}"
-          @mousedown.stop="toggle"
-          @click.stop="() => {}"
-        >
+    <transition name="zoom-in-bottom">
+      <div v-if="visible" class="volume-panel">
+        <div class="process" @click="updateVolume">
+          <div class="current-process" :style="{height: volume + '%'}">
+          </div>
+          <div
+            class="drag-btn"
+            :style="{top: `${100 - volume}%`}"
+            @mousedown="toggle"
+            @click.stop="() => {}"
+          >
+          </div>
         </div>
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -35,6 +37,7 @@ export default {
   setup(props, ctx) {
     const isMuted = ref(false)
     const volume = ref(50)
+    const visible = ref(false)
 
     const {
       setMuted,
@@ -45,6 +48,7 @@ export default {
     return {
       isMuted,
       volume,
+      visible,
       setMuted,
       updateVolume,
       toggle
@@ -55,6 +59,13 @@ export default {
 function useClick(ctx, isMuted, volume) {
   const setMuted = () => {
     isMuted.value = !isMuted.value
+    // if (isMuted.value) { // 100%
+    //   ctx.emit('setVolume', 0)
+    //   volume.value = 0
+    // } else { // 0%
+    //   ctx.emit('setVolume', 0)
+    //   volume.value = 0
+    // }
     ctx.emit('setMuted', isMuted.value)
   }
 
@@ -74,22 +85,17 @@ function useClick(ctx, isMuted, volume) {
 
   const toggle = (e) => {
     const btnDiv = e.target
-    // const activeDiv = document.querySelector('.current-process')
     const parentDiv = document.querySelector('.process')
-    // const cha = activeDiv.offsetHeight - btnDiv.offsetHeight
     const top = btnDiv.offsetTop
     const mouseY = e.clientY // 鼠标按下的位置
     document.onmousemove = function(ev) {
-      const e = ev || window.event
-      const moveY = e.clientY - mouseY // 鼠标移动的距离
+      e.target.style.opacity = 1
+      const moveY = ev.clientY - mouseY // 鼠标移动的距离
       let newY = top + moveY // top值
       // 判断最大值和最小值
       if (newY < 0) {
         newY = 0
       }
-      // if (newY >= cha) {
-      //   newY = cha
-      // }
       if (newY > 100) {
         newY = 100
       }
@@ -103,6 +109,7 @@ function useClick(ctx, isMuted, volume) {
       return false // 取消默认事件
     }
     document.onmouseup = function() {
+      e.target.style.opacity = ''
       document.onmousemove = false // 解绑移动事件
       return false
     }
@@ -119,6 +126,7 @@ function useClick(ctx, isMuted, volume) {
 <style lang="scss" scoped>
 .volume-ctrl {
   position: relative;
+  width: 25px;
   .volume-btn {
     position: relative;
     z-index: 5;
@@ -132,6 +140,7 @@ function useClick(ctx, isMuted, volume) {
     padding: 20px 15px;
     border-radius: 50px;
     background-color: rgb(77, 79, 82);
+    transition: none;
     .process {
       position: relative;
       height: 100px;
@@ -147,7 +156,7 @@ function useClick(ctx, isMuted, volume) {
         height: 100%;
         background-color: $base-color-red;
         border-radius: 50px;
-        transition: height 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+        transition: none;
       }
       .drag-btn {
         opacity: 0;
@@ -158,8 +167,8 @@ function useClick(ctx, isMuted, volume) {
         height: 12px;
         border-radius: 50%;
         background-color: #fff;
-        transform: translateY(-50%) translateX(-54%);
-        transition: top 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+        transform: translateY(-50%) translateX(-50%);
+        transition: none;
       }
       &:hover{
         cursor: pointer;

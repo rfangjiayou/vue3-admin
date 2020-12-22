@@ -13,6 +13,28 @@
 	transform: translateX(30px);
 }
 
+/* zoom-in-bottom */
+.zoom-in-bottom-enter-active {
+  animation: zoom-in-bottom .2s 
+}
+
+.zoom-in-bottom-leave-to {
+  animation: zoom-in-bottom .2s reverse
+}
+
+@keyframes zoom-in-bottom{
+  0% {
+    opacity: 0;
+    transform: scaleY(0);
+    transform-origin: center bottom;
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: center bottom;
+  }
+}
+
 /* breadcrumb */
 .breadcrumb-enter-active,
 .breadcrumb-leave-active {
