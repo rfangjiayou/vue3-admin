@@ -141,7 +141,7 @@ const useClick = (instance, state, refForm) => {
         }
       }
     }
-    /deep/ .el-button {
+    ::v-deep(.el-button) {
       margin-top: 20px;
       width: 360px;
     }

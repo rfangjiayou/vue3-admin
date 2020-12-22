@@ -244,7 +244,7 @@ export default {
 .card {
   background: $base-color-white;
   margin-bottom: 20px;
-  /deep/ .el-card__header {
+  ::v-deep(.el-card__header) {
     padding: 10px 18px;
   }
   .icon {

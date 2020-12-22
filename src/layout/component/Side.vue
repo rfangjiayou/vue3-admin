@@ -104,14 +104,14 @@ export default {
   left: 0;
   bottom: 0;
   z-index: $base-z-index;
-  /deep/ .el-scrollbar {
+  ::v-deep(.el-scrollbar) {
     height: 100%;
   }
 }
 .side-bar {
   height: calc(100vh - #{$base-header-height});
   border-right: none;
-  /deep/ .el-submenu__title i {
+  ::v-deep(.el-submenu__title i)  {
     color: $base-menu-color
   }
   // /deep/ .el-menu-item {

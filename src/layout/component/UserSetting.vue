@@ -68,7 +68,7 @@ async function userLogout(instance) {
 .user-setting {
   display: flex;
   align-items: center;
-  /deep/ &-dropdown {
+  ::v-deep(&-dropdown) {
     display: flex;
     justify-content: center;
     align-items: center;

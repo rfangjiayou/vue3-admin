@@ -102,7 +102,7 @@ const useClick = (router, tabList) => {
   display: flex;
   align-items: center;
   padding: 0 $base-padding;
-  /deep/ .el-scrollbar__bar.is-vertical {
+  ::v-deep(.el-scrollbar__bar.is-vertical) {
     display: none;
   }
   .tab-tag__inner {
