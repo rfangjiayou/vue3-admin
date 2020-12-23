@@ -1,27 +1,27 @@
 <template>
   <div class="play-ctrl">
     <PlayPauseCtrl v-bind="$attrs" />
-    <TimeLine />
-    <Process />
+    <TimeSpan v-bind="$attrs" />
+    <Process v-bind="$attrs" />
     <Volume v-bind="$attrs" />
-    <Screenfull />
+    <Fullscreen v-bind="$attrs" />
   </div>
 </template>
 
 <script>
-import PlayPauseCtrl from './PlayPauseCtrl'
-import TimeLine from './TimeLine'
+import PlayPauseCtrl from './PlayPause'
+import TimeSpan from './TimeSpan'
 import Process from './Process'
 import Volume from './Volume'
-import Screenfull from './Screenfull'
+import Fullscreen from './Fullscreen'
 
 export default {
   components: {
     PlayPauseCtrl,
-    TimeLine,
+    TimeSpan,
     Process,
     Volume,
-    Screenfull
+    Fullscreen
   }
 }
 </script>
@@ -34,9 +34,9 @@ export default {
   // display: flex;
   // align-items: center;
   display: grid;
-  grid-template-columns: 5% 10% 65% 10% 10%;
+  grid-template-columns: 25px 60px calc(100% - 20px - 60px - 45px - 45px) 25px 25px;
   grid-template-rows: 100%;
-  grid-row-gap: 10px;
+  grid-column-gap: 10px;
   margin: 0 $base-padding;
   padding: 10px $base-padding;
   border-radius: 50px;

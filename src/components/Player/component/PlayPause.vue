@@ -3,13 +3,13 @@
     v-if="isPlaying"
     class="pause-btn"
     @click="pause"
-    :iconName="`pwd_suf_2`"
+    iconName="pause"
   />
   <IconSvg
     v-else
     class="play-btn"
     @click="play"
-    :iconName="`pwd_suf`"
+    iconName="play"
   />
 </template>
 
@@ -53,6 +53,7 @@ function useClick(ctx, isPlaying) {
 <style lang="scss" scoped>
 .pause-btn, .play-btn {
   font-size: 16px;
+  margin-top: 2px;
   cursor: pointer;
 }
 </style>

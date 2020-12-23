@@ -2,13 +2,13 @@
   <div class="volume-ctrl" @mouseenter="visible = true" @mouseleave="visible = false">
     <IconSvg
       v-if="isMuted"
-      :iconName="`pwd_suf_2`"
+      iconName="unVolume"
       class="volume-btn"
       @click="setMuted"
     />
     <IconSvg
       v-else
-      :iconName="`pwd_suf`"
+      iconName="volume"
       class="volume-btn"
       @click="setMuted"
     />
@@ -31,23 +31,34 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, inject, watch, nextTick } from 'vue'
 
 export default {
   setup(props, ctx) {
-    const isMuted = ref(false)
+    const $player = inject('$player')
+
+    const isMuted = ref($player.proxy.muted)
     const volume = ref(50)
+    const volumeCache = ref(0)
     const visible = ref(false)
+
+    watch(
+      () => volume.value,
+      (newVal) => {
+        isMuted.value = newVal === 0
+      }
+    )
 
     const {
       setMuted,
       updateVolume,
       toggle
-    } = useClick(ctx, isMuted, volume)
+    } = useClick(ctx, isMuted, volume, volumeCache)
 
     return {
       isMuted,
       volume,
+      volumeCache,
       visible,
       setMuted,
       updateVolume,
@@ -56,17 +67,16 @@ export default {
   }
 }
 
-function useClick(ctx, isMuted, volume) {
+function useClick(ctx, isMuted, volume, volumeCache) {
   const setMuted = () => {
-    isMuted.value = !isMuted.value
-    // if (isMuted.value) { // 100%
-    //   ctx.emit('setVolume', 0)
-    //   volume.value = 0
-    // } else { // 0%
-    //   ctx.emit('setVolume', 0)
-    //   volume.value = 0
-    // }
-    ctx.emit('setMuted', isMuted.value)
+    if (isMuted.value) { // true是静音
+      volume.value = volumeCache.value
+      ctx.emit('setVolume', volume.value / 100)
+    } else {
+      volumeCache.value = volume.value // 缓存静音前的值
+      volume.value = 0
+      ctx.emit('setVolume', volume.value)
+    }
   }
 
   const updateVolume = (e) => {
@@ -78,9 +88,11 @@ function useClick(ctx, isMuted, volume) {
     const maxVal = e.currentTarget.offsetHeight
     const targetVolume = 1 - top / maxVal
 
-    ctx.emit('setVolume', targetVolume)
-
     volume.value = parseInt(targetVolume * 100)
+
+    nextTick(() => {
+      ctx.emit('setVolume', targetVolume)
+    })
   }
 
   const toggle = (e) => {
@@ -102,10 +114,11 @@ function useClick(ctx, isMuted, volume) {
 
       const maxVal = parentDiv.offsetHeight
       const targetVolume = 1 - newY / maxVal
-
-      ctx.emit('setVolume', targetVolume)
-
       volume.value = parseInt(targetVolume * 100)
+
+      nextTick(() => {
+        ctx.emit('setVolume', targetVolume)
+      })
       return false // 取消默认事件
     }
     document.onmouseup = function() {
@@ -131,6 +144,7 @@ function useClick(ctx, isMuted, volume) {
     position: relative;
     z-index: 5;
     font-size: 16px;
+    margin-top: 2px;
     cursor: pointer;
   }
   .volume-panel {

@@ -101,6 +101,10 @@ img{
 	max-width: 100%;
 }
 
+video::-webkit-media-controls {
+  display: none !important;
+}
+
 .fold-side-bar {
   width: $base-fold-side-width !important;
 }
