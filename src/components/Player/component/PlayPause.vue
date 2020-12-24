@@ -14,11 +14,21 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, inject, watch, computed } from 'vue'
 
 export default {
   setup(props, ctx) {
+    const $player = inject('$player')
     const isPlaying = ref(false)
+
+    watch(
+      () => computed(() => $player.ctx.ended),
+      (val) => {
+        if (val) {
+          isPlaying.value = true
+        }
+      }
+    )
 
     const {
       play,

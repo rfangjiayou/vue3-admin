@@ -48,6 +48,6 @@ function useClick(ctx, isFullscreen) {
 .fullscreen-btn {
   font-size: 16px;
   cursor: pointer;
-  margin-top: 2px;
+  margin-top: 3px;
 }
 </style>

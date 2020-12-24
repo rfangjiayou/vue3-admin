@@ -34,9 +34,9 @@ export default {
   // display: flex;
   // align-items: center;
   display: grid;
-  grid-template-columns: 25px 60px calc(100% - 20px - 60px - 45px - 45px) 25px 25px;
+  grid-template-columns: 10px 60px calc(100% - 100px - 80px) 15px 15px;
   grid-template-rows: 100%;
-  grid-column-gap: 10px;
+  grid-column-gap: 20px;
   margin: 0 $base-padding;
   padding: 10px $base-padding;
   border-radius: 50px;

@@ -36,3 +36,8 @@ export function secondsToTime(time, type) {
   // default h:m:s
   return [h, m, s].map((item) => paddingLeadZero(item)).join(':')
 }
+
+export function timeToSeconds(str) {
+  const arr = str.split(':')
+  return arr[0] * 3600 + arr[1] * 60 + arr[2] * 1
+};

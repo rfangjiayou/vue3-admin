@@ -14,7 +14,7 @@
     />
     <transition name="zoom-in-bottom">
       <div v-if="visible" class="volume-panel">
-        <div class="process" @click="updateVolume">
+        <div class="volume-process" @click="updateVolume">
           <div class="current-process" :style="{height: volume + '%'}">
           </div>
           <div
@@ -53,7 +53,7 @@ export default {
       setMuted,
       updateVolume,
       toggle
-    } = useClick(ctx, isMuted, volume, volumeCache)
+    } = useClick(ctx, isMuted, volume, volumeCache, visible)
 
     return {
       isMuted,
@@ -67,7 +67,7 @@ export default {
   }
 }
 
-function useClick(ctx, isMuted, volume, volumeCache) {
+function useClick(ctx, isMuted, volume, volumeCache, visible) {
   const setMuted = () => {
     if (isMuted.value) { // true是静音
       volume.value = volumeCache.value
@@ -97,24 +97,26 @@ function useClick(ctx, isMuted, volume, volumeCache) {
 
   const toggle = (e) => {
     const btnDiv = e.target
-    const parentDiv = document.querySelector('.process')
+    const parentDiv = document.querySelector('.volume-process')
     const top = btnDiv.offsetTop
     const mouseY = e.clientY // 鼠标按下的位置
     document.onmousemove = function(ev) {
       e.target.style.opacity = 1
+      const maxVal = parentDiv.offsetHeight
       const moveY = ev.clientY - mouseY // 鼠标移动的距离
       let newY = top + moveY // top值
       // 判断最大值和最小值
       if (newY < 0) {
         newY = 0
       }
-      if (newY > 100) {
-        newY = 100
+      if (newY > maxVal) {
+        newY = maxVal
       }
 
-      const maxVal = parentDiv.offsetHeight
       const targetVolume = 1 - newY / maxVal
-      volume.value = parseInt(targetVolume * 100)
+      if (!isNaN(targetVolume)) {
+        volume.value = parseInt(targetVolume * 100)
+      }
 
       nextTick(() => {
         ctx.emit('setVolume', targetVolume)
@@ -144,7 +146,7 @@ function useClick(ctx, isMuted, volume, volumeCache) {
     position: relative;
     z-index: 5;
     font-size: 16px;
-    margin-top: 2px;
+    margin-top: 3px;
     cursor: pointer;
   }
   .volume-panel {
@@ -155,7 +157,7 @@ function useClick(ctx, isMuted, volume, volumeCache) {
     border-radius: 50px;
     background-color: rgb(77, 79, 82);
     transition: none;
-    .process {
+    .volume-process {
       position: relative;
       height: 100px;
       width: 5px;

@@ -12,9 +12,13 @@
       class="player"
       :src="src"
       :controls="false"
+      :autobuffer="true"
       :muted="muted"
       :volume="volume"
+      :currentTime="updateTime"
       :playsinline="playsinline"
+      :ontimeupdate="timeUpdate"
+      :onprogress="progressUpdate"
     >
       <p>你的浏览器不支持 HTML5 视频。可点击<a :href="src">此链接</a>观看</p>
     </video>
@@ -22,6 +26,7 @@
       @play="play"
       @pause="pause"
       @setVolume="setVolume"
+      @setProcess="setProcess"
       @fullScreen="setFullScreen"
     />
   </div>
@@ -29,7 +34,7 @@
 
 <script>
 import Controls from './component/Controls'
-import { reactive, ref, toRefs, provide, getCurrentInstance, onMounted, onBeforeUnmount } from 'vue'
+import { reactive, ref, toRefs, provide, getCurrentInstance } from 'vue'
 import { secondsToTime } from '@/utils'
 
 export default {
@@ -61,7 +66,11 @@ export default {
       controlVisible: false,
       muted: false,
       volume: 0.5,
-      currentTime: '00:00:00'
+      currentTime: '00:00:00',
+      updateTime: 0,
+      duration: 0,
+      buffered: 0,
+      ended: false
     })
     const player = ref(null)
     const playerWrap = ref(null)
@@ -70,18 +79,16 @@ export default {
       play,
       pause,
       setVolume,
+      setProcess,
       setFullScreen
     } = useHandler(player, state, playerWrap)
 
+    const {
+      timeUpdate,
+      progressUpdate
+    } = useEvent(state)
+
     provide('$player', getCurrentInstance())
-
-    onMounted(() => {
-      player.value.addEventListener('timeupdate', e => timeUpdate(e, state))
-    })
-
-    onBeforeUnmount(() => {
-      player.value.removeEventListener('timeupdate', e => timeUpdate(e, state))
-    })
 
     return {
       ...toRefs(state),
@@ -90,14 +97,12 @@ export default {
       play,
       pause,
       setVolume,
-      setFullScreen
+      setProcess,
+      setFullScreen,
+      timeUpdate,
+      progressUpdate
     }
   }
-}
-
-function timeUpdate(e, state) {
-  const currentTime = e.target.currentTime
-  state.currentTime = secondsToTime(currentTime)
 }
 
 function enterFullscreen(playerWrap) {
@@ -120,6 +125,27 @@ function cancelFullscreen() {
   }
 }
 
+function useEvent(state) {
+  const timeUpdate = (e) => {
+    if (!e.target.seeking) {
+      const currentTime = e.target.currentTime
+      state.currentTime = secondsToTime(currentTime)
+      state.duration = e.target.duration
+      state.ended = e.target.ended
+    }
+  }
+  const progressUpdate = (e) => {
+    const bufferedEnd = e.target.buffered.end(e.target.buffered.length - 1)
+    state.buffered = bufferedEnd
+    state.duration = e.target.duration
+  }
+
+  return {
+    timeUpdate,
+    progressUpdate
+  }
+}
+
 function useHandler(player, state, playerWrap) {
   const play = () => {
     player.value.play()
@@ -128,8 +154,15 @@ function useHandler(player, state, playerWrap) {
     player.value.pause()
   }
   const setVolume = (value) => {
-    state.volume = value
+    if (!isNaN(value)) {
+      state.volume = value
+    }
     state.muted = value === 0
+  }
+  const setProcess = (value) => {
+    if (!isNaN(value)) {
+      state.updateTime = value.toFixed(2)
+    }
   }
   const setFullScreen = (value) => {
     value ? enterFullscreen(playerWrap) : cancelFullscreen()
@@ -139,6 +172,7 @@ function useHandler(player, state, playerWrap) {
     play,
     pause,
     setVolume,
+    setProcess,
     setFullScreen
   }
 }
