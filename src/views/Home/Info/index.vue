@@ -6,14 +6,7 @@
       />
     </el-col>
     <el-col :xs="24" :sm="24" :md="24" :lg="8" :xl="8">
-      <el-card
-        shadow="none"
-        class="card"
-        :body-style="{ padding: '0px' }"
-      >
-        <template #header>
-        </template>
-      </el-card>
+      <TodoList :list="list" />
     </el-col>
     <el-col :xs="24" :sm="24" :md="24" :lg="6" :xl="6">
       <el-card
@@ -29,8 +22,65 @@
 </template>
 
 <script>
-export default {
+import TodoList from '@/components/TodoList'
+import { reactive, toRefs } from 'vue'
 
+export default {
+  components: {
+    TodoList
+  },
+  setup() {
+    const state = reactive({
+      list: [
+        {
+          name: 'vue3-admin',
+          checked: false,
+          showDelete: false
+        },
+        {
+          name: 'element-ui',
+          checked: false,
+          showDelete: false
+        },
+        {
+          name: 'axios',
+          checked: true,
+          showDelete: false
+        },
+        {
+          name: 'ssr',
+          checked: false,
+          showDelete: false
+        },
+        {
+          name: 'element-plus',
+          checked: true,
+          showDelete: false
+        },
+        // {
+        //   name: 'react',
+        //   checked: false
+        // },
+        // {
+        //   name: 'react1',
+        //   checked: false
+        // },
+        // {
+        //   name: 'react2',
+        //   checked: false
+        // },
+        {
+          name: 'react3',
+          checked: false,
+          showDelete: false
+        }
+      ]
+    })
+
+    return {
+      ...toRefs(state)
+    }
+  }
 }
 </script>
 
