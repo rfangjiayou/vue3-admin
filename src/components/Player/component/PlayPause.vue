@@ -19,7 +19,18 @@ import { ref, inject, watch, computed } from 'vue'
 export default {
   setup(props, ctx) {
     const $player = inject('$player')
-    const isPlaying = ref($player.ctx.isPlaying)
+    const isPlaying = ref(false)
+
+    watch(
+      () => computed(() => $player.ctx.isPlaying),
+      (val) => {
+        isPlaying.value = val.value
+      },
+      {
+        deep: true,
+        immediate: true
+      }
+    )
 
     watch(
       () => computed(() => $player.ctx.ended),

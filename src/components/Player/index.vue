@@ -21,9 +21,18 @@
       :playsinline="playsinline"
       :ontimeupdate="timeUpdate"
       :onprogress="progressUpdate"
+      @click="clickVideo"
     >
       <p>你的浏览器不支持 HTML5 视频。可点击<a :href="src">此链接</a>观看</p>
     </video>
+    <transition name="fade">
+      <div
+        v-show="controlVisible || !isPlaying"
+        class="center-btn"
+      >
+        <PlayPause @play="play" @pause="pause" />
+      </div>
+    </transition>
     <transition name="fade">
       <Controls
         v-show="controlVisible || !isPlaying"
@@ -39,6 +48,7 @@
 
 <script>
 import Controls from './component/Controls'
+import PlayPause from './component/PlayPause'
 import { reactive, ref, toRefs, provide, getCurrentInstance } from 'vue'
 import { secondsToTime } from '@/utils'
 
@@ -64,7 +74,8 @@ export default {
     }
   },
   components: {
-    Controls
+    Controls,
+    PlayPause
   },
   setup(props) {
     const state = reactive({
@@ -86,7 +97,8 @@ export default {
       pause,
       setVolume,
       setProcess,
-      setFullScreen
+      setFullScreen,
+      clickVideo
     } = useHandler(player, state, playerWrap)
 
     const {
@@ -105,6 +117,7 @@ export default {
       setVolume,
       setProcess,
       setFullScreen,
+      clickVideo,
       timeUpdate,
       progressUpdate
     }
@@ -175,13 +188,17 @@ function useHandler(player, state, playerWrap) {
   const setFullScreen = (value) => {
     value ? enterFullscreen(playerWrap) : cancelFullscreen()
   }
+  const clickVideo = () => {
+    state.isPlaying ? pause() : play()
+  }
 
   return {
     play,
     pause,
     setVolume,
     setProcess,
-    setFullScreen
+    setFullScreen,
+    clickVideo
   }
 }
 </script>
@@ -193,6 +210,25 @@ function useHandler(player, state, playerWrap) {
     position: relative;
     height: 100%;
     width: 100%;
+  }
+  .center-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    padding: 15px 13px 15px 15px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, .38);
+    color: rgba(255, 255, 255, 0.38);
+    ::v-deep(.icon-svg) {
+      font-size: 30px;
+      margin-top: 0;
+    }
+    &:hover {
+      background: rgba(0, 0, 0, .28);
+      color: rgba(255, 255, 255, 0.58);
+    }
   }
 }
 </style>
