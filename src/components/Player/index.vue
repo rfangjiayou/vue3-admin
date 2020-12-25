@@ -13,6 +13,8 @@
       :src="src"
       :controls="false"
       :autobuffer="true"
+      :loop="loop"
+      :autoplay="autoplay"
       :muted="muted"
       :volume="volume"
       :currentTime="updateTime"
@@ -22,13 +24,16 @@
     >
       <p>你的浏览器不支持 HTML5 视频。可点击<a :href="src">此链接</a>观看</p>
     </video>
-    <Controls
-      @play="play"
-      @pause="pause"
-      @setVolume="setVolume"
-      @setProcess="setProcess"
-      @fullScreen="setFullScreen"
-    />
+    <transition name="fade">
+      <Controls
+        v-show="controlVisible || !isPlaying"
+        @play="play"
+        @pause="pause"
+        @setVolume="setVolume"
+        @setProcess="setProcess"
+        @fullScreen="setFullScreen"
+      />
+    </transition>
   </div>
 </template>
 
@@ -43,7 +48,7 @@ export default {
     src: [String, Array],
     autoplay: {
       type: Boolean,
-      default: true
+      default: false
     },
     loop: {
       type: Boolean,
@@ -70,6 +75,7 @@ export default {
       updateTime: 0,
       duration: 0,
       buffered: 0,
+      isPlaying: props.autoplay,
       ended: false
     })
     const player = ref(null)
@@ -148,9 +154,11 @@ function useEvent(state) {
 
 function useHandler(player, state, playerWrap) {
   const play = () => {
+    state.isPlaying = true
     player.value.play()
   }
   const pause = () => {
+    state.isPlaying = false
     player.value.pause()
   }
   const setVolume = (value) => {
@@ -180,6 +188,7 @@ function useHandler(player, state, playerWrap) {
 
 <style lang="scss" scoped>
 .player-wrap {
+  position: relative;
   .player {
     position: relative;
     height: 100%;

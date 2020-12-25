@@ -1,10 +1,14 @@
 <template>
   <div class="play-ctrl">
-    <PlayPauseCtrl v-bind="$attrs" />
-    <TimeSpan v-bind="$attrs" />
-    <Process v-bind="$attrs" />
-    <Volume v-bind="$attrs" />
-    <Fullscreen v-bind="$attrs" />
+    <div class="top">
+      <Process v-bind="$attrs" />
+    </div>
+    <div class="bottom">
+      <PlayPauseCtrl class="bottom-item" v-bind="$attrs" />
+      <TimeSpan class="bottom-item" v-bind="$attrs" />
+      <Volume class="bottom-item volume" v-bind="$attrs" />
+      <Fullscreen class="bottom-item" v-bind="$attrs" />
+    </div>
   </div>
 </template>
 
@@ -29,18 +33,20 @@ export default {
 <style lang="scss" scoped>
 .play-ctrl {
   position: absolute;
-  width: calc(100% - #{$base-padding * 3});
-  bottom: 20px;
-  // display: flex;
-  // align-items: center;
-  display: grid;
-  grid-template-columns: 10px 60px calc(100% - 100px - 80px) 15px 15px;
-  grid-template-rows: 100%;
-  grid-column-gap: 20px;
-  margin: 0 $base-padding;
+  width: 100%;
+  bottom: 5px;
   padding: 10px $base-padding;
-  border-radius: 50px;
-  background-color: rgb(49, 52, 58);
   color: #fff;
+  background-image: linear-gradient(180deg,transparent,rgba(0,0,0,.37),rgba(0,0,0,.75),rgba(0,0,0,.75));
+  .bottom {
+    margin-top: 10px;
+    display: flex;
+    .bottom-item + .bottom-item {
+      margin-left: 20px;
+    }
+    .volume {
+      margin-left: auto !important;
+    }
+  }
 }
 </style>

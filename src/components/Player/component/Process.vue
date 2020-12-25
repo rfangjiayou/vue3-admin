@@ -26,9 +26,6 @@ export default {
     const buffered = computed(() => $player.ctx.buffered)
 
     const current = ref(0)
-    // current.value = computed(() => {
-    //   return durationSec.value === 0 ? 0 : curTimeSec.value / durationSec.value * 100
-    // })
     const buffer = computed(() => {
       return durationSec.value === 0 ? 0 : buffered.value / durationSec.value * 100
     })
@@ -36,7 +33,10 @@ export default {
     watch(
       () => curTimeSec.value,
       (val) => {
-        current.value = durationSec.value === 0 ? 0 : val / durationSec.value * 100
+        current.value = durationSec.value === 0 ? 0 : (val / durationSec.value * 100).toFixed(2)
+        if (current.value > 99.5) {
+          current.value = 100
+        }
       }
     )
 

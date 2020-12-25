@@ -1,17 +1,21 @@
 <template>
-  <span class="current-time">{{currentTime}}</span>
+  <span class="current-time">{{currentTime}} / {{durationTime}}</span>
 </template>
 
 <script>
 import { computed, inject } from 'vue'
+import { secondsToTime } from '@/utils'
 
 export default {
   setup(props) {
     const $player = inject('$player')
     const currentTime = computed(() => $player.ctx.currentTime)
+    const duration = computed(() => $player.ctx.duration)
+    const durationTime = computed(() => secondsToTime(duration.value))
 
     return {
-      currentTime
+      currentTime,
+      durationTime
     }
   }
 }

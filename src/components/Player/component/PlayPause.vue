@@ -19,14 +19,17 @@ import { ref, inject, watch, computed } from 'vue'
 export default {
   setup(props, ctx) {
     const $player = inject('$player')
-    const isPlaying = ref(false)
+    const isPlaying = ref($player.ctx.isPlaying)
 
     watch(
       () => computed(() => $player.ctx.ended),
       (val) => {
-        if (val) {
-          isPlaying.value = true
+        if (val.value) {
+          isPlaying.value = false
         }
+      },
+      {
+        deep: true
       }
     )
 
@@ -62,8 +65,9 @@ function useClick(ctx, isPlaying) {
 
 <style lang="scss" scoped>
 .pause-btn, .play-btn {
-  font-size: 16px;
+  font-size: 18px;
   margin-top: 2px;
   cursor: pointer;
+  transition: none;
 }
 </style>

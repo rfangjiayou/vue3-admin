@@ -13,7 +13,7 @@
       @click="setMuted"
     />
     <transition name="zoom-in-bottom">
-      <div v-if="visible" class="volume-panel">
+      <div v-show="visible" class="volume-panel">
         <div class="volume-process" @click="updateVolume">
           <div class="current-process" :style="{height: volume + '%'}">
           </div>
@@ -98,8 +98,11 @@ function useClick(ctx, isMuted, volume, volumeCache, visible) {
   const toggle = (e) => {
     const btnDiv = e.target
     const parentDiv = document.querySelector('.volume-process')
+    const oDiv = document.querySelector('.volume-ctrl')
     const top = btnDiv.offsetTop
     const mouseY = e.clientY // 鼠标按下的位置
+    oDiv.onmouseleave = null
+    visible.value = true
     document.onmousemove = function(ev) {
       e.target.style.opacity = 1
       const maxVal = parentDiv.offsetHeight
@@ -124,6 +127,9 @@ function useClick(ctx, isMuted, volume, volumeCache, visible) {
       return false // 取消默认事件
     }
     document.onmouseup = function() {
+      oDiv.onmouseleave = () => {
+        visible.value = false
+      }
       e.target.style.opacity = ''
       document.onmousemove = false // 解绑移动事件
       return false
@@ -145,8 +151,8 @@ function useClick(ctx, isMuted, volume, volumeCache, visible) {
   .volume-btn {
     position: relative;
     z-index: 5;
-    font-size: 16px;
-    margin-top: 3px;
+    font-size: 18px;
+    margin-top: 2px;
     cursor: pointer;
   }
   .volume-panel {
@@ -155,7 +161,7 @@ function useClick(ctx, isMuted, volume, volumeCache, visible) {
     left: -9px;
     padding: 20px 15px;
     border-radius: 50px;
-    background-color: rgb(77, 79, 82);
+    background-color: rgba(0, 0, 0, .55);
     transition: none;
     .volume-process {
       position: relative;

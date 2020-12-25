@@ -6,9 +6,22 @@
 
 .fade-enter-active{
 	opacity: 0;
-	transform: translateX(-30px);
 }
 .fade-leave-to {
+	opacity: 0;
+}
+
+/* fade-main */
+.fade-main-enter-active,
+.fade-main-leave-active {
+	transition: all .3s;
+}
+
+.fade-main-enter-active{
+	opacity: 0;
+	transform: translateX(-30px);
+}
+.fade-main-leave-to {
 	opacity: 0;
 	transform: translateX(30px);
 }

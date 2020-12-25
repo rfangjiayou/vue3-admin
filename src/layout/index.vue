@@ -4,7 +4,7 @@
     <section class="right" :class="{'fold': isCollapse}">
       <Header />
       <section class="main" :class="{ 'fold-main': isCollapse }">
-        <transition name='fade' mode="out-in">
+        <transition name='fade-main' mode="out-in">
           <router-view  />
         </transition>
       </section>
