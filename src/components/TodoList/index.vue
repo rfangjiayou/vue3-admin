@@ -6,31 +6,38 @@
         <span class="title">Todo List</span>
       </div>
       <ul>
-        <li
-          v-for="item in todoList"
-          :key="item.name"
-        >
-          <div
-            class="list-item"
-            @mouseenter="item.showDelete = true"
-            @mouseleave="item.showDelete = false"
+        <transition-group name="todo-list">
+          <li
+            v-for="(item, index) in todoList"
+            :key="item.name"
           >
-            <CheckBtn v-model="item.checked" />
-            <span
-              :class="[
-                'label',
-                item.checked && 'checked-label'
-              ]"
-            >{{item.name}}</span>
-            <IconSvg
-              v-if="item.showDelete"
-              class="delete"
-              iconName="fullscreen"
-            />
-          </div>
-        </li>
+            <div
+              class="list-item"
+              @mouseenter="item.showDelete = true"
+              @mouseleave="item.showDelete = false"
+            >
+              <CheckBtn v-model="item.checked" />
+              <span
+                :class="[
+                  'label',
+                  item.checked && 'checked-label'
+                ]"
+              >{{item.name}}</span>
+              <IconSvg
+                v-show="item.showDelete"
+                class="delete"
+                iconName="close"
+                @click="deleteItem(index)"
+              />
+            </div>
+          </li>
+        </transition-group>
       </ul>
-      <div class="bottom"></div>
+      <div class="bottom">
+        <span>{{leftItems}} items left</span>
+        <el-input class="add-input" v-model="addItem.name" placeholder="请输入内容" size="mini"></el-input>
+        <el-button type="primary" size="mini" @click="handleAddItem">Push</el-button>
+      </div>
     </div>
     <div class="back-mid"></div>
     <div class="back-bottom"></div>
@@ -38,10 +45,11 @@
 </template>
 
 <script>
-import { reactive, toRefs } from 'vue'
+import { computed, getCurrentInstance, reactive, toRefs, watch } from 'vue'
 import CheckBtn from './component/CheckBtn'
 
 export default {
+  name: 'TodeList',
   props: {
     list: {
       type: Array,
@@ -52,35 +60,79 @@ export default {
     CheckBtn
   },
   setup(props) {
+    const instance = getCurrentInstance()
+    const list = computed(() => props.list)
     const state = reactive({
-      todoList: props.list,
-      checkAll: false
+      todoList: list,
+      checkAll: false,
+      addItem: {
+        name: '',
+        checked: false,
+        showDelete: false
+      }
     })
 
-    const handleClick = () => {
-      state.todoList.forEach(e => {
-        e.checked = !state.checkAll
-      })
-    }
+    const leftItems = computed(() => {
+      const found = state.todoList.filter(e => !e.checked)
+      return found.length
+    })
 
-    // watch(
-    //   () => state.todoList,
-    //   (val) => {
-    //     const found = val.find(e => !e.checked)
-    //     state.checkAll = !found
-    //   },
-    //   {
-    //     deep: true
-    //   }
-    // )
+    watch(
+      () => state.todoList,
+      (val) => {
+        const found = val.find(e => !e.checked)
+        state.checkAll = !found
+      },
+      {
+        deep: true
+      }
+    )
+
+    const {
+      handleClick,
+      handleAddItem,
+      deleteItem
+    } = useClick(instance, state)
 
     return {
       ...toRefs(state),
-      handleClick
+      handleClick,
+      leftItems,
+      handleAddItem,
+      deleteItem
     }
   }
 }
 
+function useClick(instance, state) {
+  const handleClick = () => {
+    state.todoList.forEach(e => {
+      e.checked = state.checkAll
+    })
+  }
+  const handleAddItem = () => {
+    if (!state.addItem.name) {
+      instance.ctx.$baseMessage('error', '不能为空！')
+      return
+    }
+    const found = state.todoList.find(e => e.name === state.addItem.name)
+    if (found) {
+      instance.ctx.$baseMessage('warning', '项目已存在！')
+      return
+    }
+    state.todoList.push(JSON.parse(JSON.stringify(state.addItem)))
+    state.addItem.name = ''
+  }
+  const deleteItem = (index) => {
+    state.todoList.splice(index, 1)
+  }
+
+  return {
+    handleClick,
+    handleAddItem,
+    deleteItem
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -126,6 +178,22 @@ export default {
       }
       .delete {
         margin-left: auto;
+        color: $base-color-red;
+        cursor: pointer;
+        font-size: 18px;
+      }
+    }
+    .bottom {
+      display: flex;
+      align-items: center;
+      padding: 10px $base-padding;
+      >span {
+        margin-right: 100px;
+        min-width: 100px;
+      }
+      .add-input {
+        margin-left: auto;
+        margin-right: 10px;
       }
     }
   }

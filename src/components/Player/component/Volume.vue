@@ -150,7 +150,7 @@ function useClick(ctx, isMuted, volume, volumeCache, visible) {
   width: 25px;
   .volume-btn {
     position: relative;
-    z-index: 5;
+    z-index: 10;
     font-size: 18px;
     margin-top: 2px;
     cursor: pointer;
@@ -163,6 +163,7 @@ function useClick(ctx, isMuted, volume, volumeCache, visible) {
     border-radius: 50px;
     background-color: rgba(0, 0, 0, .55);
     transition: none;
+    z-index: 5;
     .volume-process {
       position: relative;
       height: 100px;

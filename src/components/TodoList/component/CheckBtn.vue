@@ -10,16 +10,17 @@
       <IconSvg
         v-if="checked"
         class="checked"
-        iconName="fullscreen"
+        iconName="checked"
       />
     <!-- </transition> -->
   </span>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, watch, computed } from 'vue'
 
 export default {
+  name: 'CheckBtn',
   emit: ['update:modelValue'],
   props: {
     modelValue: Boolean
@@ -31,6 +32,13 @@ export default {
       checked.value = !checked.value
       emit('update:modelValue', checked.value)
     }
+
+    watch(
+      computed(() => props.modelValue),
+      (val) => {
+        checked.value = val
+      }
+    )
 
     return {
       checked,
@@ -54,6 +62,9 @@ export default {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    font-size: 18px;
+    color: $base-color-green;
+    margin-top: 2px;
   }
 }
 .checked-wrap {

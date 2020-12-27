@@ -2,7 +2,7 @@
   <el-row :gutter="20">
     <el-col :xs="24" :sm="24" :md="24" :lg="10" :xl="10">
       <Player
-        :src="`https://cdn.jsdelivr.net/gh/chuzhixin/videos@master/video.mp4`"
+        :src="`https://cdn.jsdelivr.net/gh/rfangjiayou/cdn@1.0/video/video.mp4`"
       />
     </el-col>
     <el-col :xs="24" :sm="24" :md="24" :lg="8" :xl="8">

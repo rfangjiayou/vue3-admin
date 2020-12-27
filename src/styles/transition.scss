@@ -71,3 +71,23 @@
 .breadcrumb-leave-active {
 	position: absolute;
 }
+
+/* todo-list */
+.todo-list-enter-active,
+.todo-list-leave-active {
+	transition: all .3s;
+}
+
+.todo-list-enter-active{
+	opacity: 0;
+	transform: translateX(-80px);
+}
+
+.todo-list-leave-to {
+	opacity: 0;
+	transform: translateX(80px);
+}
+
+.todo-list-move {
+	transition: all .3s;
+}
