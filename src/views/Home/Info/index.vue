@@ -9,25 +9,20 @@
       <TodoList :list="list" />
     </el-col>
     <el-col :xs="24" :sm="24" :md="24" :lg="6" :xl="6">
-      <el-card
-        shadow="none"
-        class="card"
-        :body-style="{ padding: '0px' }"
-      >
-        <template #header>
-        </template>
-      </el-card>
+      <SelfPanel />
     </el-col>
   </el-row>
 </template>
 
 <script>
 import TodoList from '@/components/TodoList'
+import SelfPanel from './component/SelfPanel'
 import { reactive, toRefs } from 'vue'
 
 export default {
   components: {
-    TodoList
+    TodoList,
+    SelfPanel
   },
   setup() {
     const state = reactive({

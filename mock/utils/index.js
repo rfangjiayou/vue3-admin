@@ -1,5 +1,10 @@
+const { Random } = require('mockjs')
 const { join } = require('path')
 const fs = require('fs')
+
+const getRandomImage = (width = 50, height = 50) => {
+  return `https://picsum.photos/${width}/${height}?random=${Random.guid()}`
+}
 
 const getMockList = () => {
   const mockArray = []
@@ -25,5 +30,6 @@ const getMockList = () => {
 }
 
 module.exports = {
-  getMockList
+  getMockList,
+  getRandomImage
 }
