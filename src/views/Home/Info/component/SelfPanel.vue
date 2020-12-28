@@ -75,7 +75,7 @@ async function init(state, loading) {
 
     setTimeout(() => {
       loading.value = false
-    }, 3000)
+    }, 2000)
   }
 }
 </script>
