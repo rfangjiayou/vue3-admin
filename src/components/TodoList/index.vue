@@ -142,9 +142,7 @@ function useClick(instance, state) {
   width: calc(100% - 15px);
   height: 100%;
   .back-top {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
     z-index: 10;
     height: 100%;
     width: 100%;
@@ -162,6 +160,9 @@ function useClick(instance, state) {
         font-weight: 600;
         color: $base-font-color;
       }
+    }
+    ul {
+      margin-bottom: 48px;
     }
     .list-item {
       padding: 10px $base-padding;
@@ -182,8 +183,17 @@ function useClick(instance, state) {
         cursor: pointer;
         font-size: 18px;
       }
+      &:hover {
+        background-color: #f5f7fa;
+        transition: background-color .25s ease;
+        border-bottom-color: #ebeef5;
+      }
     }
     .bottom {
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
       display: flex;
       align-items: center;
       padding: 10px $base-padding;

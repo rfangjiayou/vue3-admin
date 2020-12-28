@@ -57,20 +57,20 @@ export default {
           checked: true,
           showDelete: false
         },
-        // {
-        //   name: 'react',
-        //   checked: false
-        // },
-        // {
-        //   name: 'react1',
-        //   checked: false
-        // },
-        // {
-        //   name: 'react2',
-        //   checked: false
-        // },
         {
-          name: 'react3',
+          name: 'javascript',
+          checked: false
+        },
+        {
+          name: 'http',
+          checked: true
+        },
+        {
+          name: 'node',
+          checked: false
+        },
+        {
+          name: 'react',
           checked: false,
           showDelete: false
         }
