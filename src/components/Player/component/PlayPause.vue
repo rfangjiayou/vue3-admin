@@ -22,7 +22,7 @@ export default {
     const isPlaying = ref(false)
 
     watch(
-      () => computed(() => $player.ctx.isPlaying),
+      () => computed(() => $player.proxy.isPlaying),
       (val) => {
         isPlaying.value = val.value
       },
@@ -33,7 +33,7 @@ export default {
     )
 
     watch(
-      () => computed(() => $player.ctx.ended),
+      () => computed(() => $player.proxy.ended),
       (val) => {
         if (val.value) {
           isPlaying.value = false

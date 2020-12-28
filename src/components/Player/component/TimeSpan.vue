@@ -9,8 +9,8 @@ import { secondsToTime } from '@/utils'
 export default {
   setup(props) {
     const $player = inject('$player')
-    const currentTime = computed(() => $player.ctx.currentTime)
-    const duration = computed(() => $player.ctx.duration)
+    const currentTime = computed(() => $player.proxy.currentTime)
+    const duration = computed(() => $player.proxy.duration)
     const durationTime = computed(() => secondsToTime(duration.value))
 
     return {

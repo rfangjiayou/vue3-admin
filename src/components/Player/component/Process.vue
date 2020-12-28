@@ -19,11 +19,11 @@ export default {
   setup(props, { emit }) {
     const $player = inject('$player')
 
-    const currentTime = computed(() => $player.ctx.currentTime)
-    const durationSec = computed(() => $player.ctx.duration)
+    const currentTime = computed(() => $player.proxy.currentTime)
+    const durationSec = computed(() => $player.proxy.duration)
     const curTimeSec = computed(() => timeToSeconds(currentTime.value))
 
-    const buffered = computed(() => $player.ctx.buffered)
+    const buffered = computed(() => $player.proxy.buffered)
 
     const current = ref(0)
     const buffer = computed(() => {
