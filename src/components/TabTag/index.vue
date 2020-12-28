@@ -107,7 +107,7 @@ const useClick = (router, tabList) => {
   }
   .tab-tag__inner {
     display: flex;
-    // margin-top: 5px;
+    margin-top: 5px;
   }
   .tab-btn {
     display: inline-block;
