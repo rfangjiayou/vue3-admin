@@ -23,7 +23,10 @@
         </div>
       </template>
       <template #default>
-        <img :src="imgUrl" class="self-panel-img">
+        <div class="self-panel-img">
+          <img :src="imgUrl">
+          <Avatar class="self-avatar" />
+        </div>
         <div class="process">
           <template v-for="item in processList" :key="item.label">
             <div class="label">{{item.label}}</div>
@@ -32,7 +35,6 @@
               :status="item.percentage === 100 ? 'success' : ''"
             />
           </template>
-          <Avatar class="self-avatar" />
         </div>
       </template>
     </el-skeleton>
@@ -91,13 +93,21 @@ async function init(state, loading) {
   }
 }
 .self-panel-img {
-  object-fit: cover;
-  &:hover {
-    transform: scale(1.1);
+  position: relative;
+  img {
+    object-fit: cover;
+    width: 100%;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+  .self-avatar {
+    position: absolute;
+    bottom: -35px;
+    left: 30px;
   }
 }
 .process {
-  position: relative;
   padding: $base-padding $base-padding 40px $base-padding;
   .label {
     font-size: 16px;
@@ -106,11 +116,6 @@ async function init(state, loading) {
     &:first-child {
       margin-top: 30px;
     }
-  }
-  .self-avatar {
-    position: absolute;
-    top: -35px;
-    left: 30px;
   }
 }
 </style>
