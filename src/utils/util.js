@@ -38,6 +38,9 @@ export function secondsToTime(time, type) {
 }
 
 export function timeToSeconds(str) {
-  const arr = str.split(':')
-  return arr[0] * 3600 + arr[1] * 60 + arr[2] * 1
+  if (str) {
+    const arr = str.split(':')
+    return arr[0] * 3600 + arr[1] * 60 + arr[2] * 1
+  }
+  return '00:00:00'
 };
