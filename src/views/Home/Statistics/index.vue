@@ -18,7 +18,7 @@
           <div class="clearfix">
             <i class="el-icon-info icon"></i>
             <span class="desc">{{item.desc}}</span>
-            <el-button class="button" type="text">查看趋势</el-button>
+            <el-button @click="getData" class="button" type="text">查看趋势</el-button>
           </div>
           <div class="clearfix bottom">
             <IconSvg
@@ -42,7 +42,8 @@
 </template>
 
 <script>
-import { reactive, toRefs } from 'vue'
+import { onMounted, reactive, toRefs } from 'vue'
+import { getStatistics } from '@/services'
 
 export default {
   setup() {
@@ -199,7 +200,7 @@ export default {
         series: [
           {
             name: 'expected',
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            data: [],
             type: 'line',
             itemStyle: {
               emphasis: {
@@ -215,7 +216,7 @@ export default {
           },
           {
             name: 'actual',
-            data: [1200, 1320, 1010, 1340, 900, 2300, 2100],
+            data: [],
             type: 'line',
             areaStyle: {
               opacity: 0.1
@@ -233,8 +234,21 @@ export default {
       }
     })
 
+    onMounted(() => getData())
+
+    const getData = async() => {
+      const { success, result } = await getStatistics()
+      if (success) {
+        state.options.series.forEach(e => {
+          const found = Object.keys(result).filter(ele => ele === e.name)
+          e.data = found && result[found]
+        })
+      }
+    }
+
     return {
-      ...toRefs(state)
+      ...toRefs(state),
+      getData
     }
   }
 }

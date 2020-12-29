@@ -5,7 +5,7 @@
 <script>
 import ECharts from 'echarts/lib/echarts'
 import '@/plugins/echarts'
-import { onMounted, onBeforeUnmount, toRefs, ref } from 'vue'
+import { onMounted, onBeforeUnmount, toRefs, ref, watch, nextTick } from 'vue'
 import { debounce } from 'lodash-es'
 import { addListener, removeListener } from 'resize-detector'
 
@@ -21,6 +21,18 @@ export default {
     const { options } = toRefs(props)
     const echart = ref(null)
     const myChart = ref(null)
+
+    watch(
+      () => options,
+      () => {
+        nextTick(() => {
+          myChart.value.setOption(options.value)
+        })
+      },
+      {
+        deep: true
+      }
+    )
 
     onMounted(() => {
       myChart.value = initChart(echart, options)
