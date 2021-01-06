@@ -41,15 +41,15 @@ const routes = [
               label: '头像上传'
             },
             component: () => import(/* webpackChunkName: "AvatarUpload" */ '@/views/Components/AvatarUpload/index.vue')
-          },
-          {
-            path: 'flow-chart',
-            name: 'FlowChart',
-            meta: {
-              label: '流程图'
-            },
-            component: () => import(/* webpackChunkName: "FlowChart" */ '@/views/Components/FlowChart/index.vue')
           }
+          // {
+          //   path: 'flow-chart',
+          //   name: 'FlowChart',
+          //   meta: {
+          //     label: '流程图'
+          //   },
+          //   component: () => import(/* webpackChunkName: "FlowChart" */ '@/views/Components/FlowChart/index.vue')
+          // }
         ]
       },
       {

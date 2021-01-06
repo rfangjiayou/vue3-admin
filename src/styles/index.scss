@@ -105,6 +105,10 @@ video::-webkit-media-controls {
   display: none !important;
 }
 
+canvas {
+  outline: none;
+}
+
 .fold-side-bar {
   width: $base-fold-side-width !important;
 }
@@ -120,4 +124,35 @@ video::-webkit-media-controls {
   &:after {
     clear: both
   }
+}
+
+.quill-editor {
+	.ql-toolbar {
+		background-color: #fff !important;
+		border: 1px solid #DDDDDD;
+		border-bottom: 1px solid #DDDDDD;
+		.ql-stroke {
+			stroke: #999;
+		}
+		.ql-fill {
+			fill: #999;
+		}
+	}
+	.ql-container {
+		border: 1px solid #DDDDDD;
+		border-top: none;
+	}
+}
+
+.is-error {
+	.q-editor {
+		.ql-toolbar {
+			border: 1px solid #F56C6C;
+			border-bottom: 1px solid #ccc;
+		}
+		.ql-container {
+			border: 1px solid #F56C6C;
+			border-top: none;
+		}
+	}
 }

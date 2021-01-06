@@ -5,33 +5,50 @@
 </template>
 
 <script>
-import { getCurrentInstance, onMounted, ref } from 'vue'
+import { getCurrentInstance, inject, onMounted, reactive, ref } from 'vue'
+import { nodeTemplate } from '@/utils'
 
 export default {
-  setup() {
+  props: {
+    diagramComplete: Boolean
+  },
+  emits: ['paletteMounted'],
+  setup(props, { emit }) {
     const instance = getCurrentInstance()
+    // const { diagramComplete } = toRefs(props)
+    const $myDiagram = inject('$diagram')
+
     const myPalette = ref({})
+    const state = reactive({
+      nodeDataArray: [
+        { key: 'RoundRectangle', color: '#42b983', fig: 'RoundedRectangle' },
+        { key: 'Hexagon', color: 'lightblue', fig: 'Hexagon' },
+        { key: '???', color: 'orange', fig: 'Diamond' },
+        { key: '', color: 'lightblue', fig: 'MinusLine' }
+      ],
+      linkDataArray: []
+    })
 
     onMounted(() => {
-      init(instance, myPalette)
+      init(instance, state, myPalette, $myDiagram)
+      emit('paletteMounted', myPalette)
     })
   }
 }
 
-function init(instance, myPalette) {
+function init(instance, state, myPalette, $myDiagram) {
   const { ctx } = instance
   myPalette.value = ctx.$make(ctx.$go.Palette, 'my-palette', {
+    // 令绘制的元素相对画布居中
+    initialContentAlignment: ctx.$go.Spot.Center,
+    // 是否可撤销编辑
+    'undoManager.isEnabled': true,
     // scrollsPageOnFocus: false,
     // 分享 myDiagram 的模板
-    // nodeTemplateMap: this.myDiagram.nodeTemplateMap,
+    // nodeTemplateMap: $myDiagram.value.nodeTemplateMap,
+    nodeTemplate,
     // 指定 myPalette 显示的内容
-    model: new ctx.$go.GraphLinksModel([
-      { category: 'Start', text: 'Start' },
-      { text: 'Step' },
-      { text: '???', figure: 'Diamond' },
-      { category: 'End', text: 'End' },
-      { category: 'Comment', text: 'Comment' }
-    ])
+    model: new ctx.$go.GraphLinksModel(state.nodeDataArray, state.linkDataArray)
   })
 }
 </script>
