@@ -35,6 +35,14 @@ const routes = [
             component: () => import(/* webpackChunkName: "Editor" */ '@/views/Components/Editor/index.vue')
           },
           {
+            path: 'verify',
+            name: 'Verify',
+            meta: {
+              label: '滑动验证码'
+            },
+            component: () => import(/* webpackChunkName: "Verify" */ '@/views/Components/Verify/index.vue')
+          },
+          {
             path: 'avatar-upload',
             name: 'AvatarUpload',
             meta: {

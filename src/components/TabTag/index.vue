@@ -113,7 +113,7 @@ const useClick = (router, tabList) => {
     display: inline-block;
     padding: 5px 10px;
     border: 1px solid $base-border-color;
-    border-radius: $base-border-radius;
+    border-radius: 2px;
     cursor: pointer;
     &__inner {
       font-size: 12px;
