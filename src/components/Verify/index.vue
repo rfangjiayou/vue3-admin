@@ -123,7 +123,6 @@ export default {
       sliderSize
     } = toRefs(props)
     const state = reactive({
-      instance,
       canvasMain: null,
       canvasSuccess: null,
       canvasPic: null,
@@ -181,7 +180,7 @@ export default {
       onRangeMouseDown,
       onRangeMouseMove,
       onRangeMouseUp
-    } = useMouseEvent(state, emit, props, styleWidth, sliderBaseSize, puzzleBaseSize)
+    } = useMouseEvent(state, emit, props, instance, styleWidth, sliderBaseSize, puzzleBaseSize)
 
     const handleClick = () => {
       reset(state, emit, props, sliderBaseSize, puzzleBaseSize)
@@ -488,7 +487,7 @@ function makeImgWithCanvas(canvasWidth, canvasHeight) {
   return canvas.toDataURL('image/png')
 }
 
-function useMouseEvent(state, emit, props, styleWidth, sliderBaseSize, puzzleBaseSize) {
+function useMouseEvent(state, emit, props, instance, styleWidth, sliderBaseSize, puzzleBaseSize) {
   const onCloseMouseDown = () => {
     emit('update:visible', false)
   }
@@ -512,7 +511,7 @@ function useMouseEvent(state, emit, props, styleWidth, sliderBaseSize, puzzleBas
   const onRangeMouseUp = () => {
     if (state.mouseDown) {
       state.mouseDown = false
-      submit(state, emit, props, styleWidth, sliderBaseSize, puzzleBaseSize)
+      submit(state, emit, props, instance, styleWidth, sliderBaseSize, puzzleBaseSize)
     }
   }
 
@@ -525,7 +524,7 @@ function useMouseEvent(state, emit, props, styleWidth, sliderBaseSize, puzzleBas
 }
 
 // 开始判定
-function submit(state, emit, props, styleWidth, sliderBaseSize, puzzleBaseSize) {
+function submit(state, emit, props, instance, styleWidth, sliderBaseSize, puzzleBaseSize) {
   const { canvasWidth, range } = props
   // 偏差 x = puzzle的起始X - (用户真滑动的距离) + (puzzle的宽度 - 滑块的宽度) * （用户真滑动的距离/canvas总宽度）
   // 最后+ 的是补上slider和滑块宽度不一致造成的缝隙
@@ -536,7 +535,7 @@ function submit(state, emit, props, styleWidth, sliderBaseSize, puzzleBaseSize) 
             (canvasWidth - sliderBaseSize.value)) - 3
   )
   if (x <= range) { // 成功
-    state.instance.ctx.$baseMessage('success', '验证成功！')
+    instance.ctx.$baseMessage('success', '验证成功！')
     clearTimeout(state.timer)
     state.timer = setTimeout(() => {
       state.isCanSlide = false
@@ -545,7 +544,7 @@ function submit(state, emit, props, styleWidth, sliderBaseSize, puzzleBaseSize) 
       emit('update:visible', false)
     }, 800)
   } else { // 失败
-    state.instance.ctx.$baseMessage('error', '验证失败，请重新验证！')
+    instance.ctx.$baseMessage('error', '验证失败，请重新验证！')
     clearTimeout(state.timer)
     state.timer = setTimeout(() => {
       state.isCanSlide = false
