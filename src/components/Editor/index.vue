@@ -347,12 +347,12 @@ function useUpload(instance, editor) {
         quill.setSelection(range.index + 1)
       }
     } else {
-      instance.ctx.$baseMessage('error', msg || '图片上传失败！')
+      instance.proxy.$baseMessage('error', msg || '图片上传失败！')
     }
   }
   const uploadError = (res, file) => {
     if (res && file.status === 'fail') {
-      instance.ctx.$baseMessage('error', res.message || '图片上传失败！')
+      instance.proxy.$baseMessage('error', res.message || '图片上传失败！')
     }
   }
 

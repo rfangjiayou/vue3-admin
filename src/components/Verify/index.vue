@@ -535,7 +535,7 @@ function submit(state, emit, props, instance, styleWidth, sliderBaseSize, puzzle
             (canvasWidth - sliderBaseSize.value)) - 3
   )
   if (x <= range) { // 成功
-    instance.ctx.$baseMessage('success', '验证成功！')
+    instance.proxy.$baseMessage('success', '验证成功！')
     clearTimeout(state.timer)
     state.timer = setTimeout(() => {
       state.isCanSlide = false
@@ -544,7 +544,7 @@ function submit(state, emit, props, instance, styleWidth, sliderBaseSize, puzzle
       emit('update:visible', false)
     }, 800)
   } else { // 失败
-    instance.ctx.$baseMessage('error', '验证失败，请重新验证！')
+    instance.proxy.$baseMessage('error', '验证失败，请重新验证！')
     clearTimeout(state.timer)
     state.timer = setTimeout(() => {
       state.isCanSlide = false

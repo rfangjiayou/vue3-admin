@@ -112,12 +112,12 @@ function useClick(instance, state) {
   }
   const handleAddItem = () => {
     if (!state.addItem.name) {
-      instance.ctx.$baseMessage('error', '不能为空！')
+      instance.proxy.$baseMessage('error', '不能为空！')
       return
     }
     const found = state.todoList.find(e => e.name === state.addItem.name)
     if (found) {
-      instance.ctx.$baseMessage('warning', '项目已存在！')
+      instance.proxy.$baseMessage('warning', '项目已存在！')
       return
     }
     state.todoList.push(JSON.parse(JSON.stringify(state.addItem)))
