@@ -44,3 +44,8 @@ export function timeToSeconds(str) {
   }
   return '00:00:00'
 };
+
+// 范围随机数
+export function getRandom(min, max) {
+  return Math.ceil(Math.random() * (max - min) + min)
+}
