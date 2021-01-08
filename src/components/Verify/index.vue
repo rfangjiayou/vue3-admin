@@ -229,6 +229,7 @@ function init(state, emit, props, puzzleBaseSize) {
   const ctxPic = canvasPic.getContext('2d')
   const img = document.createElement('img')
   ctxMain.clearRect(0, 0, canvasWidth.value, canvasHeight.value)
+  ctxPic.clearRect(0, 0, canvasWidth.value, canvasHeight.value)
   ctxSuccess.clearRect(0, 0, canvasWidth.value, canvasHeight.value)
 
   // 取一个随机坐标，作为拼图块的位置

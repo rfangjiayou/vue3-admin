@@ -3,7 +3,6 @@
     <el-skeleton
       :loading="loading"
       animated
-      :throttle="500"
     >
       <template #template>
         <el-skeleton-item
@@ -24,7 +23,7 @@
       </template>
       <template #default>
         <div class="self-panel-img">
-          <img :src="imgUrl">
+          <img class="img" :src="imgUrl">
           <Avatar class="self-avatar" />
         </div>
         <div class="process">
@@ -42,7 +41,7 @@
 </template>
 
 <script>
-import { onMounted, reactive, toRefs, ref } from 'vue'
+import { onMounted, reactive, toRefs, ref, nextTick } from 'vue'
 import { getSelfPanelData } from '@/services'
 import Avatar from '@/components/Avatar'
 
@@ -75,9 +74,13 @@ async function init(state, loading) {
     state.processList = list
     state.imgUrl = imgUrl
 
-    setTimeout(() => {
-      loading.value = false
-    }, 2000)
+    nextTick(() => {
+      const img = document.createElement('img')
+      img.src = imgUrl
+      img.onload = () => {
+        loading.value = false
+      }
+    })
   }
 }
 </script>
