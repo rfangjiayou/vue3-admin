@@ -304,6 +304,7 @@ function init(state, emit, props, puzzleBaseSize) {
       state.pinX + puzzleBaseSize.value + 5,
       state.pinY + puzzleBaseSize.value + 5
     )
+    ctxPic.clearRect(0, 0, puzzleBaseSize.value + 5, canvasHeight.value)
     ctxPic.putImageData(imageData, 0, state.pinY - 20)
 
     // 清理
