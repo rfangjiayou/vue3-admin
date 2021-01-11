@@ -76,10 +76,10 @@ async function init(state, loading) {
 
     nextTick(() => {
       const img = document.createElement('img')
-      img.src = imgUrl
       img.onload = () => {
         loading.value = false
       }
+      img.src = imgUrl
     })
   }
 }

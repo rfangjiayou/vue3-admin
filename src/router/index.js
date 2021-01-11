@@ -43,6 +43,14 @@ const routes = [
             component: () => import(/* webpackChunkName: "Verify" */ '@/views/Components/Verify/index.vue')
           },
           {
+            path: 'drag-dialog',
+            name: 'DragDialog',
+            meta: {
+              label: '可拖拽弹窗'
+            },
+            component: () => import(/* webpackChunkName: "DragDialog" */ '@/views/Components/DragDialog/index.vue')
+          },
+          {
             path: 'avatar-upload',
             name: 'AvatarUpload',
             meta: {

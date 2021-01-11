@@ -5,6 +5,7 @@
       <p>调整拼图块尺寸(:puzzleScale, 倍数, 默认1)</p>
       <el-slider
         class="slider"
+        tooltip-class="slider-popover"
         v-model="puzzleScale"
         :min="0.2"
         :max="2"
@@ -13,6 +14,7 @@
       <p>调整滑块尺寸(:sliderSize, px, 默认50)</p>
       <el-slider
         class="slider"
+        tooltip-class="slider-popover"
         v-model="sliderSize"
         :min="30"
         :max="80"

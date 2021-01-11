@@ -156,3 +156,10 @@ canvas {
 		}
 	}
 }
+
+.slider-popover {
+  transition: none;
+  * {
+    transition: none;
+  }
+}

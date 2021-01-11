@@ -75,6 +75,7 @@ export default {
           children: [
             { label: '富文本编辑器', name: 'Editor', path: '/components/editor' },
             { label: '滑动验证码', name: 'Verify', path: '/components/verify' },
+            { label: '可拖拽弹窗', name: 'DragDialog', path: '/components/drag-dialog' },
             { label: '头像上传', name: 'AvatarUpload', path: '/components/avatar-upload' }
             // { label: '流程图', name: 'FlowChart', path: '/components/flow-chart' }
           ]

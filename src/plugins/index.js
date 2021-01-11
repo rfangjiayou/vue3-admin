@@ -3,6 +3,8 @@ import 'element-plus/lib/theme-chalk/index.css'
 import vuePrototype from '@/utils/prototype.js'
 import flow from '@/utils/flow.js'
 
+import drag from '@/directive/dialogDrag'
+
 import Page from '@/components/Page'
 import IconSvg from '@/components/IconSvg'
 import Chart from '@/components/Chart'
@@ -12,6 +14,7 @@ const install = (app, options) => {
   app.use(ElementPlus)
   app.use(vuePrototype)
   app.use(flow)
+  app.use(drag)
 
   app.component('Page', Page)
   app.component('IconSvg', IconSvg)
