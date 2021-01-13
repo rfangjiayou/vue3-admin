@@ -51,6 +51,14 @@ const routes = [
             component: () => import(/* webpackChunkName: "DragDialog" */ '@/views/Components/DragDialog/index.vue')
           },
           {
+            path: 'magnifier',
+            name: 'Magnifier',
+            meta: {
+              label: '放大镜'
+            },
+            component: () => import(/* webpackChunkName: "Magnifier" */ '@/views/Components/Magnifier/index.vue')
+          },
+          {
             path: 'avatar-upload',
             name: 'AvatarUpload',
             meta: {
