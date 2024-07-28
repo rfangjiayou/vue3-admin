@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://rfangjiayou.github.io/vue3-admin",
   "scripts": {
-    "serve": "cross-env NODE_ENV=development vue-cli-service serve",
+    "dev": "cross-env NODE_ENV=development vue-cli-service serve",
     "build": "cross-env NODE_ENV=production vue-cli-service build",
     "inspect": "node --inspect node_modules/@vue/cli-service/bin/vue-cli-service.js serve",
     "analyzer": "cross-env NODE_ENV=analyzer vue-cli-service build --report",
