@@ -10,6 +10,7 @@ import 'echarts/lib/component/legend'
 import 'echarts/lib/component/legendScroll'
 // import 'echarts/lib/component/visualMap';
 import 'echarts/lib/component/title'
+import 'echarts/lib/component/grid'
 // import 'echarts/lib/component/dataZoom'
 
 // export default ECharts
