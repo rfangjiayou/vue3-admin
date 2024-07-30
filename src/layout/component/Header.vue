@@ -1,8 +1,8 @@
 <template>
   <div class="nav-bar-wrap" :class="{ 'fold': isCollapse }">
     <div class="nav-bar">
-      <i v-if="!isCollapse" class="icon el-icon-s-fold" @click="handleToggle"></i>
-      <i v-else class="icon el-icon-s-unfold" @click="handleToggle"></i>
+      <el-icon v-if="!isCollapse" @click="handleToggle" class="icon"><Fold /></el-icon>
+      <el-icon v-else class="icon" @click="handleToggle"><Expand /></el-icon>
       <Breadcrumb />
       <UserSetting class="user-setting" />
     </div>

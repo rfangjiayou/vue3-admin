@@ -1,7 +1,7 @@
 <template>
   <div class="side-bar-container" :class="{ 'fold-side-bar': isCollapse }">
     <nav-logo />
-    <el-scrollbar>
+    <el-scrollbar class="side-bar-scroll">
       <el-menu
         class="side-bar"
         :default-active="$route.path"
@@ -13,13 +13,14 @@
         router
       >
         <template v-for="menu in menus" >
-          <el-submenu
+          <el-sub-menu
             v-if="menu.children.length"
             :key="menu.name"
             :index="menu.path"
           >
             <template #title>
               <i :class="menu.icon"></i>
+              <!-- <el-icon>{{ menu.icon }}</el-icon> -->
               <span>{{ menu.label }}</span>
             </template>
             <el-menu-item
@@ -31,13 +32,14 @@
                 <span>{{ child.label }}</span>
               </template>
             </el-menu-item>
-          </el-submenu>
+          </el-sub-menu>
           <el-menu-item
             v-else
             :key="menu.name"
             :index="menu.path"
           >
-            <i :class="menu.icon"></i>
+            <i :class="menu.icon.name"></i>
+            <!-- <el-icon>{{ menu.icon }}</el-icon> -->
             <template #title>
               <span>{{ menu.label }}</span>
             </template>
@@ -57,6 +59,9 @@ import {
 import { useStore } from 'vuex'
 import style from '@/styles/variables.scss'
 import NavLogo from './NavLogo'
+import {
+  HomeFilled
+} from '@element-plus/icons-vue'
 
 export default {
   components: {
@@ -66,7 +71,7 @@ export default {
     const store = useStore()
     const state = reactive({
       menus: [
-        { label: '首页', name: 'Home', path: '/home', icon: 'el-icon-s-home', children: [] },
+        { label: '首页', name: 'Home', path: '/home', icon: HomeFilled, children: [] },
         {
           label: '组件',
           name: 'Components',
@@ -108,12 +113,12 @@ export default {
   left: 0;
   bottom: 0;
   z-index: $base-z-index;
-  ::v-deep(.el-scrollbar) {
-    height: 100%;
-  }
+}
+.side-bar-scroll {
+  height: calc(100vh - #{$base-header-height});
+  background: $base-menu-background;
 }
 .side-bar {
-  height: calc(100vh - #{$base-header-height});
   border-right: none;
   ::v-deep(.el-submenu__title i)  {
     color: $base-menu-color

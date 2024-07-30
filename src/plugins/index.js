@@ -1,5 +1,5 @@
 import ElementPlus from 'element-plus'
-import 'element-plus/lib/theme-chalk/index.css'
+import 'element-plus/dist/index.css'
 import vuePrototype from '@/utils/prototype.js'
 import flow from '@/utils/flow.js'
 
@@ -9,6 +9,7 @@ import Page from '@/components/Page'
 import IconSvg from '@/components/IconSvg'
 import Chart from '@/components/Chart'
 import Player from '@/components/Player'
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
 const install = (app, options) => {
   app.use(ElementPlus)
@@ -20,6 +21,9 @@ const install = (app, options) => {
   app.component('IconSvg', IconSvg)
   app.component('Chart', Chart)
   app.component('Player', Player)
+  for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+    app.component(key, component)
+  }
 }
 
 export default install
