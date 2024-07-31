@@ -365,6 +365,7 @@ function useUpload(instance, editor) {
 
 <style lang="scss" scoped>
 .q-editor {
+  width: 100%;
   transition: none;
   * {
     transition: none;

@@ -2,7 +2,7 @@
   <div class="drag-dialog-wrap">
     <Tip :message="message" />
     <div class="drag-dialog-wrap__inner">
-      <el-button @click="visible = true" class="btn" size="small">打开弹窗</el-button>
+      <el-button @click="visible = true" class="btn">打开弹窗</el-button>
     </div>
     <el-dialog
       title="可拖拽Dialog"

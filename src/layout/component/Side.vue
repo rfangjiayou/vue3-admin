@@ -19,8 +19,7 @@
             :index="menu.path"
           >
             <template #title>
-              <i :class="menu.icon"></i>
-              <!-- <el-icon>{{ menu.icon }}</el-icon> -->
+              <component :is="menu.icon" class="myIcon"></component>
               <span>{{ menu.label }}</span>
             </template>
             <el-menu-item
@@ -38,8 +37,7 @@
             :key="menu.name"
             :index="menu.path"
           >
-            <i :class="menu.icon.name"></i>
-            <!-- <el-icon>{{ menu.icon }}</el-icon> -->
+            <component :is="menu.icon" class="myIcon"></component>
             <template #title>
               <span>{{ menu.label }}</span>
             </template>
@@ -60,7 +58,10 @@ import { useStore } from 'vuex'
 import style from '@/styles/variables.scss'
 import NavLogo from './NavLogo'
 import {
-  HomeFilled
+  HomeFilled,
+  Menu,
+  Histogram,
+  WarnTriangleFilled
 } from '@element-plus/icons-vue'
 
 export default {
@@ -75,7 +76,7 @@ export default {
         {
           label: '组件',
           name: 'Components',
-          icon: 'el-icon-menu',
+          icon: Menu,
           path: '/components',
           children: [
             { label: '富文本编辑器', name: 'Editor', path: '/components/editor' },
@@ -86,8 +87,8 @@ export default {
             // { label: '流程图', name: 'FlowChart', path: '/components/flow-chart' }
           ]
         },
-        { label: '图表', name: 'Chart', path: '/chart', icon: 'el-icon-s-data', children: [] },
-        { label: '错误页', name: 'Error', path: '/error', icon: 'el-icon-s-release', children: [] }
+        { label: '图表', name: 'Chart', path: '/chart', icon: Histogram, children: [] },
+        { label: '错误页', name: 'Error', path: '/error', icon: WarnTriangleFilled, children: [] }
       ],
       isCollapse: computed(() => store.getters['sideBar/isCollapse'])
     })
@@ -123,13 +124,10 @@ export default {
   ::v-deep(.el-submenu__title i)  {
     color: $base-menu-color
   }
-  // /deep/ .el-menu-item {
-  //   &:hover {
-  //     background-color: $base-color-default !important;
-  //   }
-  // }
-  // /deep/ .is-active {
-  //   background-color: $base-menu-background-active !important;
-  // }
+  .myIcon {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+  }
 }
 </style>

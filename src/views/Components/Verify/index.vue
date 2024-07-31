@@ -20,9 +20,9 @@
         :max="80"
       />
       <h3>基本</h3>
-      <el-button @click="getVerify" class="btn" size="small">开始验证</el-button>
+      <el-button @click="getVerify" class="btn">开始验证</el-button>
       <h3>自定义图片</h3>
-      <el-button @click="getVerifyCustom" class="btn" size="small">开始验证</el-button>
+      <el-button @click="getVerifyCustom" class="btn">开始验证</el-button>
     </div>
     <Verify
       v-model:visible="visible"
